@@ -43,7 +43,7 @@ def part_1():
 
 
 def part_2():
-    entries = read_input('day8_test.txt')
+    entries = read_input('day8.txt')
     # I'm flipping this dictionary so that it is len(display): display
     display_len = {len(v): k for k, v in display.items() if k in [1, 4, 7, 8]}
     output_vals = {}
@@ -53,58 +53,49 @@ def part_2():
         for sig in entry['signal_pat']:
             if len(sig) in display_len.keys():
                 entry_disp[display_len[len(sig)]] = sig
-        # 2 - display 1 contains c and f. display 2 is the only one that does not contain f
-        # f value - display 2 is the only one that does not contain f
+        # how many times does each letter appear in each signal?
+        num_appearances = {}
+        for letter in 'abcdefg':
+            num_appearances[letter] = len([sig for sig in entry['signal_pat'] if letter in sig])
+        # f value - f is in 9 displays (display 2 is the only one that does not contain f)
+        f = [x for x in num_appearances if num_appearances[x] == 9][0]
+        # e value - e is in only 4 displays
+        e = [x for x in num_appearances if num_appearances[x] == 4][0]
+        # b value - b is in only 6 displays
+        b = [x for x in num_appearances if num_appearances[x] == 6][0]
+        # 2 - display 2 is the only one that does not contain f
+        for sig in entry['signal_pat']:
+            if f not in sig:
+                entry_disp[2] = sig
         # c value - the other letter in display 1 that is not f
-        for letter in entry_disp[1]:
-            for sig in entry['signal_pat']:
-                if letter not in sig:
-                    entry_disp[2] = sig
-                    f = letter
-                    c = [l for l in entry_disp[1] if l != f][0]
+        c = [x for x in entry_disp[1] if x != f][0]
         # a value - display 7 has values a, c and f and display 1 only has c and f
         a = [l for l in entry_disp[7] if l not in entry_disp[1]][0]
-        # b and d values - display 4 has b, c, d and f. c and f have been found so the remaining 2 are b and d
-        # b shows up in 6 displays, d shows up in 7 displays
-        for l in [x for x in entry_disp[4] if x not in (c, f)]:
-            signals_with_letter = [x for x in entry['signal_pat'] if l in x]
-            if len(signals_with_letter) == 6:
-                b = l
-            elif len(signals_with_letter) == 7:
-                d = l
-        # g value - displays 3 and 4 have 5 letters and the only unknown is g
-        for sig in [s for s in entry['signal_pat'] if len(s) == 5]:
-            unknown_letters = [l for l in sig if l not in (a, b, c, d, f)]
-            if len(unknown_letters) == 1:
-                g = unknown_letters[0]
-        # e value - the last unknown letter is e. Display 8 has all the letters so the unknown must be e
-        e = [l for l in entry_disp[8] if l not in (a, b, c, d, f, g)][0]
-        # fill in the remaining displays now that I have all the letters. Start with the longest first.
+        # d value - display 4 has b, c, d and f. b, c and f have been found so the remaining one is d
+        d = [x for x in entry_disp[4] if x not in (b, c, f)][0]
+        # g value - g is the last unknown, it should be the only letter in display 8 that is unknown
+        g = [x for x in entry_disp[8] if x not in (a, b, c, d, e, f)][0]
+        # fill in the remaining displays now that I have all the letters starting with the longer ones.
+        # I already have 1, 4, 7, 8 and 2
         for sig in entry['signal_pat']:
-            if len(sig) == len(display[0]) and len([z for z in sig if z in (a, b, c, e, f, g)]) == len(display[0]):
+            if all(x in sig for x in [a, b, c, e, f, g]) and all(x in [a, b, c, e, f, g] for x in sig):
                 entry_disp[0] = sig
-            # elif len(sig) == len(display[6]) and len([z for z in sig if z in (a, b, d, e, f, g)]) == len(display[6]):
-            #     entry_disp[6] = sig
-            elif len(sig) == len(display[9]) and len([z for z in sig if z in (a, b, c, d, f, g)]) == len(display[9]):
-                entry_disp[9] = sig
-            elif len(sig) == len(display[2]) and len([z for z in sig if z in (a, c, d, e, g)]) == len(display[2]):
-                entry_disp[2] = sig
-            elif len(sig) == len(display[3]) and len([z for z in sig if z in (a, c, d, f, g)]) == len(display[3]):
-                entry_disp[3] = sig
-            # elif len(sig) == len(display[5]) and len([z for z in sig if z in (a, b, d, f, g)]) == len(display[5]):
-            #     entry_disp[5] = sig
-            elif len(sig) == len(display[6]):
+            elif all(x in sig for x in [a, b, d, e, f, g]) and all(x in [a, b, d, e, f, g] for x in sig):
                 entry_disp[6] = sig
-            elif len(sig) == len(display[5]):
+            elif all(x in sig for x in [a, b, c, d, f, g]) and all(x in [a, b, c, d, f, g] for x in sig):
+                entry_disp[9] = sig
+            elif all(x in sig for x in [a, c, d, f, g]) and all(x in [a, c, d, f, g] for x in sig):
+                entry_disp[3] = sig
+            elif all(x in sig for x in [a, b, d, f, g]) and all(x in [a, b, d, f, g] for x in sig):
                 entry_disp[5] = sig
         assert len(entry_disp.keys()) == 10, f"\nMissing keys in {entry_num}\n{entry}\n{len(entry_disp)}\n{entry_disp}"
         str_val = ''
         for out in entry['output']:
             for val, code in entry_disp.items():
-                if len(out) == len(code) and len([j for j in code if j in out]) == len(out):
+                if all(x in out for x in code) and all(x in code for x in out):
                     str_val += str(val)
+        assert len(str_val) == 4, f"\nEntry\n{entry}\nEntry Disp\n{entry_disp}\nOutput so far\n{output_vals}\nLatest output\n{out}"
         output_vals[entry_num] = int(str_val)
-    print(output_vals)
     return sum(output_vals.values())
 
 
