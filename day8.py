@@ -12,10 +12,6 @@ display = {
     8: ['a', 'b', 'c', 'd', 'e', 'f', 'g'],     # 7
     9: ['a', 'b', 'c', 'd', 'f', 'g']           # 6
 }
-display_reverse = {'a': [], 'b': [], 'c': [], 'd': [], 'e': [], 'f': [], 'g': []}
-for k, v in display.items():
-    for letter in v:
-        display_reverse[letter].append(k)
 
 
 def read_input(file: str = 'day8.txt'):
@@ -70,13 +66,12 @@ def part_2():
         # c value - the other letter in display 1 that is not f
         c = [x for x in entry_disp[1] if x != f][0]
         # a value - display 7 has values a, c and f and display 1 only has c and f
-        a = [l for l in entry_disp[7] if l not in entry_disp[1]][0]
+        a = [x for x in entry_disp[7] if x not in entry_disp[1]][0]
         # d value - display 4 has b, c, d and f. b, c and f have been found so the remaining one is d
         d = [x for x in entry_disp[4] if x not in (b, c, f)][0]
         # g value - g is the last unknown, it should be the only letter in display 8 that is unknown
         g = [x for x in entry_disp[8] if x not in (a, b, c, d, e, f)][0]
-        # fill in the remaining displays now that I have all the letters starting with the longer ones.
-        # I already have 1, 4, 7, 8 and 2
+        # fill in the remaining displays now that I have all the letters (I already have 1, 4, 7, 8 and 2)
         for sig in entry['signal_pat']:
             if all(x in sig for x in [a, b, c, e, f, g]) and all(x in [a, b, c, e, f, g] for x in sig):
                 entry_disp[0] = sig
