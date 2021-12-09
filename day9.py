@@ -1,44 +1,45 @@
 import os
-import pandas as pd
+from math import prod
 
 
 def read_input(file: str):
-    data_returned = []
+    height = {}
     with open(os.path.join('inputs', file)) as f:
-        data = f.read().split('\n')
-    for row in data:
-        data_returned.append([int(x) for x in row])
-    return data_returned
+        for x, row in enumerate(f.read().split('\n')):
+            for y, val in enumerate(row):
+                height[(x, y)] = int(val)
+    return height
+
+
+height = read_input('day9.txt')
+
+
+def neighbours(x, y):
+    return filter(lambda n: n in height,
+                  [(x, y - 1), (x, y + 1), (x - 1, y), (x + 1, y)])  # remove points outside grid
+
+
+def is_low(p):
+    return all(height[p] < height[n] for n in neighbours(*p))
+
+
+low_points = list(filter(is_low, height))
 
 
 def part_1():
-    data = read_input('day9.txt')
-    df = pd.DataFrame(data)
-    num_rows, num_cols = df.shape
-    risk_level = 0
-    for col in df.columns:
-        for row, row_data in df.iterrows():
-            cell_val = df.loc[row, col]
-            comp_cells = []
-            if row != 0:
-                left_cell = df.loc[row - 1, col]
-                comp_cells.append(left_cell)
-            if row != (num_rows - 1):
-                right_cell = df.loc[row + 1, col]
-                comp_cells.append(right_cell)
-            if col != 0:
-                up_cell = df.loc[row, col - 1]
-                comp_cells.append(up_cell)
-            if col != (num_cols - 1):
-                down_cell = df.loc[row, col + 1]
-                comp_cells.append(down_cell)
-            if min(comp_cells) > cell_val:
-                risk_level += (cell_val + 1)
-    return risk_level
+    return sum(height[p] + 1 for p in low_points)
 
 
 def part_2():
-    pass
+
+    def count_basin(p):
+        if height[p] == 9:
+            return 0  # stop counting at ridge
+        del height[p]  # prevent further visits
+        return 1 + sum(map(count_basin, neighbours(*p)))
+
+    basins = [count_basin(p) for p in low_points]
+    return prod(sorted(basins)[-3:])
 
 
 if __name__ == '__main__':
