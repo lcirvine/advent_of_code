@@ -30,7 +30,6 @@ class Octopuses:
     def check_flashes(self):
         for f in self.return_new_flashers():
             self.flash_count += 1
-            self.energy[f] = 0
             self.already_flashed.append(f)
             for n in self.neighbors(f):
                 self.energy[n] += 1
