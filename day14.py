@@ -1,6 +1,8 @@
 import os
 from collections import Counter
 
+"""Needed help with part 2. I did set the problem up correctly and I was on the right track."""
+
 
 def read_input(file: str):
     with open(os.path.join('inputs', file)) as f:

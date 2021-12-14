@@ -1,6 +1,10 @@
 import os
 from collections import defaultdict
 
+"""
+Had to get significant help with both parts of this puzzle. 
+"""
+
 
 def read_input(file: str):
     caves = defaultdict(list)

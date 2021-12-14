@@ -1,6 +1,10 @@
 import os
 from math import prod
 
+"""
+I was able to solve part 1, but needed help on part 2. Then refactored part 1 with what I learned from part 2.
+"""
+
 
 def read_input(file: str):
     height = {}
