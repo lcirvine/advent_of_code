@@ -24,12 +24,17 @@ def part_1():
 
 
 def part_2():
-    file = 'day14_test.txt'
-    with open(os.path.join('inputs', file)) as f:
-        data = f.read().split('\n')
-    template = data.pop(0)
-    data.remove('')
-    rules = {x.split(' -> ')[0]: x.split(' -> ')[0][0] + x.split(' -> ')[1] + x.split(' -> ')[0][1] for x in data}
+    template, rules = read_input('day14.txt')
+    chars = Counter(template)
+    pairs = Counter([template[x] + template[x + 1] for x in range(len(template) - 1)])
+    for _ in range(40):
+        for (a, b), c in pairs.copy().items():
+            x = rules[a + b]
+            pairs[a + b] -= c
+            pairs[a + x] += c
+            pairs[x + b] += c
+            chars[x] += c
+    return max(chars.values()) - min(chars.values())
 
 
 if __name__ == '__main__':
