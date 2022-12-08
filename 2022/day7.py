@@ -25,6 +25,27 @@ $ ls
 8033020 d.log
 5626152 d.ext
 7214296 k"""
+command_list = commands.split('\n')
+
+
+def walk_through_commands(limit: 100000):
+    # this ignores the top '/' dir
+    pat_cd_dir = r"\$\scd\s([a-zA-Z])\s"
+    pat_move_up = r"\$\scd\s(\.\.)\s"
+    pat_file_size = r"^(\d*)\s"
+    pat_contains_dir = r"^dir\s(\w*)"
+    pat_ls = r"\$\sls"
+    for i, cmd in enumerate(command_list):
+        dr = re.match(pat_cd_dir, cmd)
+        if dr:
+            file_size = 0
+            contents = dir_contents(dir_name=dr.group(1), command_str='\n'.join(command_list[i:]))
+            files = [item for item in contents if 'dir ' not in item]
+            file_size += sum([int(re.match(r"(\d*)", f).group()) for f in files])
+            if file_size > limit:
+                pass
+            sub_dirs = [item.split('dir ')[1] for item in dir_contents(dr) if 'dir ' in item]
+
 
 
 def dir_contents(dir_name: str, command_str: str = commands) -> list:

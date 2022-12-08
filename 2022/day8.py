@@ -13,12 +13,9 @@ def part_1():
     min_x, min_y = min(tree_map)  # will be (0, 0)
     max_x, max_y = max(tree_map)
     for coord, height in tree_map.items():
-        x = coord[0]
-        y = coord[1]
+        x, y = coord
         # borders
-        if x == min_x or x == max_x:
-            visible_trees += 1
-        elif y == min_y or y == max_y:
+        if x == min_x or x == max_x or y == min_y or y == max_y:
             visible_trees += 1
         else:
             # make sure to add +1 to get end of range and not to count the current tree!
@@ -36,8 +33,7 @@ def part_2():
     max_x, max_y = max(tree_map)
     scenic_scores = {}
     for coord, height in tree_map.items():
-        x = coord[0]
-        y = coord[1]
+        x, y = coord
         left_trees_visible = 0
         # you have to count out from the tree, not in toward the tree!
         for lt in range(x - 1, min_x - 1, -1):
