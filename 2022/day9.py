@@ -4,20 +4,10 @@ moves = get_input().split('\n')
 
 
 class Rope:
-    def __init__(self, rope_len: int, test=False):
+    def __init__(self, rope_len: int):
         self.rope = [(0, 0) for knot in range(rope_len)]
         self.tail_positions = [self.rope[-1]]
-        if test:
-            self.moves = """R 5
-U 8
-L 8
-D 3
-R 17
-D 10
-L 25
-U 20""".split('\n')
-        else:
-            self.moves = get_input().split('\n')
+        self.moves = get_input().split('\n')
 
     def move_head(self):
         for move in self.moves:
@@ -49,13 +39,13 @@ U 20""".split('\n')
                 elif prev_x < curr_x:
                     curr_x -= 1
             # vertical move
-            if delta_x == 0 and delta_y > 1:
+            elif delta_x == 0 and delta_y > 1:
                 if prev_y > curr_y:
                     curr_y += 1
                 elif prev_y < curr_y:
                     curr_y -= 1
             # diagonal
-            if (delta_x == 1 and delta_y > 1) or (delta_x > 1 and delta_y == 1):
+            elif (delta_x == 1 and delta_y > 1) or (delta_x > 1 and delta_y == 1):
                 if prev_x > curr_x:
                     curr_x += 1
                 elif prev_x < curr_x:
@@ -64,6 +54,15 @@ U 20""".split('\n')
                     curr_y += 1
                 elif prev_y < curr_y:
                     curr_y -= 1
+            elif delta_x > 1 and delta_y > 1:
+                if prev_x > curr_x:
+                    curr_x += delta_x - 1
+                elif prev_x < curr_x:
+                    curr_x -= delta_x - 1
+                if prev_y > curr_y:
+                    curr_y += delta_y - 1
+                elif prev_y < curr_y:
+                    curr_y -= delta_y - 1
             self.rope[knot_num] = (curr_x, curr_y)
 
     def track_tail(self):
