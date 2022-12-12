@@ -4,11 +4,14 @@ from pathlib import Path
 from datetime import date
 
 
-def get_input(day_num: int = date.today().day, year: int = date.today().year):
+def get_input(day_num: int = date.today().day, year: int = date.today().year, test=False):
     input_folder = Path.cwd() / 'inputs'
     if not input_folder.exists():
         input_folder.mkdir()
-    file_path = input_folder / f"day{day_num}.txt"
+    if test:
+        file_path = input_folder / f"day{day_num}_test.txt"
+    else:
+        file_path = input_folder / f"day{day_num}.txt"
     if file_path.exists():
         with open(file_path) as f:
             data = f.read()
