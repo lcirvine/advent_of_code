@@ -1,6 +1,7 @@
 from aoc_inputs import get_input
+from pathlib import Path
 
-instructions = get_input().split('\n')
+instruction_list = get_input(day_num=10).split('\n')
 
 
 def part_1():
@@ -8,7 +9,7 @@ def part_1():
     cycle = 0
     x = 1
     signal_strengths = []
-    for instr in instructions:
+    for instr in instruction_list:
         if instr.startswith('addx '):
             num = int(instr.split('addx ')[1])
             for cy in range(2):
@@ -26,9 +27,36 @@ def part_1():
 
 
 def part_2():
-    pass
+    cycle_add_to_x = {x: 0 for x in range(1, 242)}
+    current_cycle = 0
+    for instr in instruction_list:
+        if instr.startswith('addx '):
+            current_cycle += 2
+            cycle_add_to_x[current_cycle] += int(instr.split('addx ')[1])
+        elif instr == 'noop':
+            current_cycle += 1
+    crt = []
+    row = []
+    x = 1
+    for cycle in range(1, 242):
+        pos = (cycle - 1) % 40
+        if pos == 0:
+            crt.append(row)
+            row = []
+        if pos in range(x-1, x + 2):
+            row.append('#')
+        else:
+            row.append('.')
+        x += cycle_add_to_x[cycle]
+    with open(Path.cwd() / 'inputs' / 'day10_visual.txt', 'w') as f:
+        for r in crt:
+            for pixel in r:
+                f.write(pixel + ' ')
+            f.write('\n')
+    for r in crt:
+        print(' '.join(r))
 
 
 if __name__ == '__main__':
     print(part_1())
-    print(part_2())
+    part_2()
