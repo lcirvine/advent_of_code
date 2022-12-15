@@ -1,4 +1,7 @@
 from aoc_inputs import get_input
+import sys
+
+sys.setrecursionlimit(10**6)
 
 
 def rock_map(test=False) -> list:
@@ -14,7 +17,9 @@ def rock_map(test=False) -> list:
             for x in range(min(xcur, xnxt), max(xcur, xnxt) + 1):
                 for y in range(min(ycur, ynxt), max(ycur, ynxt) + 1):
                     rocks.append((x, y))
-    return list(set(rocks))
+    rocks = list(set(rocks))
+    rocks.sort()
+    return rocks
 
 
 class Cave:
@@ -24,6 +29,8 @@ class Cave:
         self.sand = []
         self.rymax = max([r[1] for r in self.rocks])
         self.rymin = min([r[1] for r in self.rocks])
+        self.rxmin = min([r[0] for r in self.rocks])
+        self.rxmax = max([r[0] for r in self.rocks])
         self.sand_start = (500, 0)
 
     def next_loc(self, loc: tuple):
@@ -34,10 +41,11 @@ class Cave:
 
     def not_in_abyss(self, loc: tuple):
         sx, sy = loc
-        if sy > self.rymax:
-            return False
-        else:
+        rocks_below = [r for r in self.rocks if r[0] == sx and r[1] > sy]
+        if rocks_below and len(self.sand) < 75:
             return True
+        else:
+            return False
 
     def sand_fall(self, loc: tuple = None):
         if loc is None:
@@ -50,12 +58,27 @@ class Cave:
             return self.sand_fall(nloc)
 
     def return_sand_amount(self):
-        return len(self.sand)
+        return len(set(self.sand))
+
+    def create_visualization(self):
+        with open(r"inputs/day14_visualization.txt", 'w') as f:
+            for y in range(0, self.rymax + 1):
+                for x in range(self.rxmin - 1, self.rxmax + 2):
+                    if x == 500 and y == 0:
+                        f.write('+ ')
+                    elif (x, y) in self.rocks:
+                        f.write('# ')
+                    elif (x, y) in self.sand:
+                        f.write('O ')
+                    else:
+                        f.write('. ')
+                f.write('\n')
 
 
 def part_1():
     c = Cave()
     c.sand_fall()
+    c.create_visualization()
     return c.return_sand_amount()
 
 
