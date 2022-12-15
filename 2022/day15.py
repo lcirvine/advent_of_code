@@ -36,7 +36,7 @@ def part_1(test=False):
     """
     Triangles!!!
     """
-    unavail = []
+    unavail = set()
     if test:
         y_val = 10
     else:
@@ -50,9 +50,7 @@ def part_1(test=False):
             dist = sigattrs['distance']
             triangle_base = dist - abs(sy - y_val)
             for bx in range(sx - triangle_base, sx + triangle_base + 1):
-                unavail.append((bx, y_val))
-    # remove duplicates
-    unavail = set(unavail)
+                unavail.add((bx, y_val))
     # remove x values if there is already a beacon there
     for beacon in unavail.intersection(beacon_pos):
         unavail.remove(beacon)
