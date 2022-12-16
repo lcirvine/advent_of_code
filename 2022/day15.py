@@ -10,7 +10,7 @@ def get_signal_map(test=False):
         sy, by = [int(y) for y in re.findall(r"y=([\-\d]*)", sensor)]
         dist = abs(sx - bx) + abs(sy - by)
         signal_map[(sx, sy)] = {'beacon': (bx, by), 'distance': dist}
-    return dict(sorted(signal_map.items()))
+    return signal_map
 
 
 def signal_area(signal: tuple, dist: int):
@@ -33,7 +33,7 @@ def signal_area(signal: tuple, dist: int):
 def signal_borders(signal: tuple, dist: int, max_val: int):
     sx, sy = signal
     # want to be outside the border
-    # dist += 1
+    dist += 1
     borders = []
     for dx in range(dist + 1):
         dy = dist - dx
@@ -53,8 +53,8 @@ def outside_signal_area(loc: tuple, signal_map: dict = None):
     for sig, sigattrs in signal_map.items():
         sx, sy = sig
         dist = sigattrs['distance']
-        # is this even in range of the signal?
-        if (abs(x - sx) + abs(x - sy)) > dist:
+        # is this in range of the signal?
+        if (abs(x - sx) + abs(y - sy)) > dist:
             outside.append(True)
         else:
             outside.append(False)
@@ -62,7 +62,7 @@ def outside_signal_area(loc: tuple, signal_map: dict = None):
     return all(outside)
 
 
-def part_1(test=True):
+def part_1(test=False):
     """
     Triangles!!!
     """
@@ -81,13 +81,13 @@ def part_1(test=True):
             triangle_base = dist - abs(sy - y_val)
             for bx in range(sx - triangle_base, sx + triangle_base + 1):
                 unavail.add((bx, y_val))
-    # remove x values if there is already a beacon there
+    # remove locations where there is already a beacon
     for beacon in unavail.intersection(beacon_pos):
         unavail.remove(beacon)
     return len(unavail)
 
 
-def part_2(test=True):
+def part_2(test=False):
     signal_map = get_signal_map(test=test)
     if test:
         max_val = 20
@@ -98,6 +98,7 @@ def part_2(test=True):
         for loc in borders:
             if outside_signal_area(loc, signal_map):
                 print(loc)
+                return (loc[0] * 4000000) + loc[1]
 
 
 if __name__ == '__main__':
