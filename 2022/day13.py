@@ -1,9 +1,30 @@
 from aoc_inputs import get_input
+import json
 
-pairs = get_input(day_num=13).split('\n\n')
+pairs = get_input(day_num=13, test=True).split('\n\n')
 
 
-def part_1():
+def compare(left, right):
+    for i in range(min(len(left), len(right))):
+        li = left[i]
+        ri = right[i]
+        if isinstance(li, int) and isinstance(ri, int):
+            if li == ri:
+                continue
+            elif li < ri:
+                return 1
+            else:
+                return 0
+        elif isinstance(li, int) and isinstance(ri, list):
+            return compare(left=[li], right=ri)
+        elif isinstance(li, list) and isinstance(ri, int):
+            return compare(left=li, right=[ri])
+        elif isinstance(li, list) and isinstance(ri, list):
+            return compare(left=li, right=ri)
+
+
+def char_comparison():
+    """This works for part 1 of the example but not for the real input"""
     ix_sum = 0
     pair_num = 0
     for pair in pairs:
@@ -35,6 +56,17 @@ def part_1():
             elif i == (len(left) - 1) and len(left) < len(right):
                 ix_sum += pair_num
     return ix_sum
+
+
+def part_1():
+    total = 0
+    for i, pair in enumerate(pairs, start=1):
+        left, right = pair.split('\n')
+        left = json.loads(left)
+        right = json.loads(right)
+        val = compare(left, right)
+        if val:
+            total += val * i
 
 
 def part_2():
