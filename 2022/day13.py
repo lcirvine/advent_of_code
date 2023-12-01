@@ -1,33 +1,33 @@
 from aoc_inputs import get_input
 import json
 
-pairs = get_input(day_num=13, test=True).split('\n\n')
+pairs = {}
+for i, pair in enumerate(get_input(day_num=13, test=True).split('\n\n'), start=1):
+    l, r = pair.split('\n')
+    pairs[i] = {'left': json.loads(l), 'right': json.loads(r)}
 
 
 def compare(left, right):
-    for i in range(min(len(left), len(right))):
-        li = left[i]
-        ri = right[i]
-        if isinstance(li, int) and isinstance(ri, int):
-            if li == ri:
-                continue
-            elif li < ri:
-                return 1
-            else:
-                return 0
-        elif isinstance(li, int) and isinstance(ri, list):
-            return compare(left=[li], right=ri)
-        elif isinstance(li, list) and isinstance(ri, int):
-            return compare(left=li, right=[ri])
-        elif isinstance(li, list) and isinstance(ri, list):
-            return compare(left=li, right=ri)
+    if isinstance(left, int) and isinstance(right, int):
+        if left == right:
+            return 0
+        elif left < right:
+            return 1
+        else:
+            return -1
+    elif isinstance(left, int) and isinstance(right, list):
+        return compare(left=[left], right=right)
+    elif isinstance(left, list) and isinstance(right, int):
+        return compare(left=left, right=[right])
+    elif isinstance(left, list) and isinstance(right, list):
+        return compare(left=left[0], right=right[0])
 
 
 def char_comparison():
     """This works for part 1 of the example but not for the real input"""
     ix_sum = 0
     pair_num = 0
-    for pair in pairs:
+    for pair in get_input(day_num=13, test=True).split('\n\n'):
         pair_num += 1
         left, right = pair.split('\n')
         for i in range(min(len(left), len(right))):
@@ -60,13 +60,16 @@ def char_comparison():
 
 def part_1():
     total = 0
-    for i, pair in enumerate(pairs, start=1):
-        left, right = pair.split('\n')
-        left = json.loads(left)
-        right = json.loads(right)
-        val = compare(left, right)
-        if val:
-            total += val * i
+    for i, pair in pairs.items():
+        left = pair['left']
+        right = pair['right']
+        for j in range(min(len(left), len(right))):
+            val = compare(left[j], right[j])
+            if val == 1 or (j == len(left) and len(left) < len(right)):
+                total += (val * i)
+                break
+            elif val == -1:
+                break
 
 
 def part_2():

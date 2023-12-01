@@ -4,7 +4,18 @@ from pathlib import Path
 from datetime import date
 
 
-def get_input(day_num: int = date.today().day, year: int = date.today().year, test=False):
+def get_input(day_num: int = date.today().day, year: int = date.today().year, test=False) -> str:
+    """
+    Get the puzzle input for the day and year provided.
+
+    Args:
+        day_num (int): Day number (i.e. 1 for the first, 2 for the second, etc.), defaults to current day number
+        year (int): Year in YYYY format, defaults to current year
+        test (bool): True - Return test input, False - return puzzle input, defaults to False
+
+    Returns:
+        String with puzzle input, rows should be split with new line character
+    """
     input_folder = Path.cwd() / 'inputs'
     if not input_folder.exists():
         input_folder.mkdir()
