@@ -1,6 +1,6 @@
 import sys
 sys.path.append('..')
-from aoc_inputs import get_input
+from aoc_utils import get_input
 
 data = get_input()
 
