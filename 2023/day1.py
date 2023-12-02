@@ -33,6 +33,6 @@ def part_2(calibrations: list):
 
 
 if __name__ == '__main__':
-    puzzle_data = get_input().split('\n')
+    puzzle_data = get_input(day_num=1).split('\n')
     print(part_1(puzzle_data))
     print(part_2(puzzle_data))
