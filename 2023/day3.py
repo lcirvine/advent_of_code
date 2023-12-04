@@ -8,9 +8,11 @@ special_chars = [x for x in set(data) if not x.isnumeric() and x not in ('\n', '
 special_char_coords = []
 gear_coords = []
 char_map = {}
+# creating a dictionary with keys as (x, y) and values as char in location
 for y, row in enumerate(data.split('\n'), 0):
     for x, char in enumerate(row, 0):
         char_map[(x, y)] = char
+        # saving special characters and gears (pt 2) in separate list
         if char in special_chars:
             special_char_coords.append((x, y))
         if char == '*':
@@ -34,10 +36,17 @@ def part_2():
         gx = gear_coord[0]
         gy = gear_coord[1]
         neighbors = []
-        for row_num in (gy - 1, gy + 1):
-            if row_num in range(0, len(rows) + 1):
-                for nm in [mo.group() for mo in re.finditer(r"(\d*)", rows[row_num]) if mo.group() and ((gx - 1 in mo.span()) or (gx + 1 in mo.span()))]:
-                    neighbors.append(nm)
+        # look at the rows above, on, and below the row with the gear
+        for row_num in [y for y in range(gy - 1, gy + 2) if y in range(0, len(rows))]:
+            # find what numbers are in that row
+            for mo in [m for m in re.finditer(r"(\d*)", rows[row_num]) if m.group()]:
+                # find if the x coord is in range of number
+                mo_x_span = range(mo.start(), mo.end())
+                if (gx - 1 in mo_x_span) or (gx in mo_x_span) or (gx + 1 in mo_x_span):
+                    neighbors.append(int(mo.group()))
+        if len(neighbors) == 2:
+            result += (neighbors[0] * neighbors[1])
+    return result
 
 
 if __name__ == '__main__':

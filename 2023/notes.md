@@ -36,3 +36,29 @@
 
 #### Tags
 - regex
+
+## Day 3
+- When parsing the data I created 
+  - a list of special characters - special characters were anything that is not a digit, '.', or new line character
+  - a character map - keys were (x, y) coordinates and values were characters. I didn't end up using the character map that much, but could be used to find the character in any location (i.e. ```char_map[(2, 3)] = '$'```)
+  - a list of special character coordinates - all coordinates where the value was a special character
+  - a list of gear coordinates - in pt 2 gears were given as '*' so I saved those coordinates in a list
+- Today's code could be cleaned up a bit, I think this could have been done in a simpler way
+### Part 1
+- I went through each row to find all the digits in that row
+  - ```[mo for mo in re.finditer(r"(\d*)", row) if mo.group()]```
+  - ```re.finditer()``` to find all matches in the row
+  - ```(\d*)``` is greedy, will return all digits in the number
+- Then I found the 'neighbors' (the coordinates around the number)
+- Finally checked if any of the neighbors were special characters
+### Part 2
+- In part 2, I started with the gear coordinates 
+- Then looked at the row above, on and below the row with the gear
+- Then found the digits in that row
+- Then checked if the x coordinate for that digit is on or within one of the gear's x coordinate
+- Finally, I saved the neighbors that met the criteria in a list. Any gears that had 2 neighbors were multipled together to find the result
+
+#### Tags
+- regex
+- regex finditer to find multiple matches
+- creating mapping with X Y coordinates
