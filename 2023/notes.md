@@ -1,5 +1,7 @@
 # Advent of Code 2023 Notes
 
+https://adventofcode.com/2023
+
 ## Day 1
 ### Part 1
 
@@ -62,3 +64,31 @@
 - regex
 - regex finditer to find multiple matches
 - creating mapping with X Y coordinates
+
+## Day 4
+- Parsing - The data is given to you as 'Card 1: 41 48 83 86 17 | 83 86  6 31 17  9 48 53'. I used the string function split and regex to separate that into
+  - card ID - split by ':', then used regex to find the ID number
+  - winning numbers - split by '|', winning numbers would be first group
+  - my numbers - the numbers I had on the scratchcard would be in the 2nd group
+- Data structure - I tried a few different ways to organize the data. I figured out that all we really need is the number of wins for each card and, for part 2, which scratchcards would be won by that card. I created a dictionary with card ID as the key and values for number of cards, how many cards that scratchcard would win, and what cards would be won by that scratchcard.
+
+### Part 1
+- The main thing you need to know for part 1 is how many wins were there for each scratchcard
+- The number of wins was already in my dictionary, so I looped through to find the number of wins, then find the number of points earned. 
+
+### Part 2
+- Created a recursive function to increment the number of cards
+  ```python 
+    def increment_winners(card_id):
+      for card_won in card_info[card_id]['wins_cards']:
+          card_info[card_won]['num_cards'] += 1
+          increment_winners(card_won)
+    ```
+
+#### Tags
+- recursion
+- recursive functions
+- data structure
+- regex
+- sets
+- set intersection
