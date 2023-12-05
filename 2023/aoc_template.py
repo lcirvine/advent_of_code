@@ -14,5 +14,9 @@ def part_2():
 
 
 if __name__ == '__main__':
-    print(part_1())
-    print(part_2())
+    a1 = part_1()
+    print(a1)
+    # submit_answer(part=1, answer=a1, day_num=5)
+    a2 = part_2()
+    print(a2)
+    # submit_answer(part=2, answer=a2, day_num=5)
