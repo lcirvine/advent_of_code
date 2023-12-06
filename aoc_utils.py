@@ -55,5 +55,5 @@ def submit_answer(part: int, answer, day_num: int = date.today().day, year: int 
                         data={'level': part, 'answer': answer},
                         verify=False, cookies=aoc_cookies)
     assert res.ok, f"{res.status_code}\n{res.text}"
-    soup = BeautifulSoup(res.text.strip(), 'html.parser')
-    print(soup.text)
+    soup = BeautifulSoup(res.text, 'html.parser')
+    print(soup.text.strip())
