@@ -58,7 +58,7 @@ https://adventofcode.com/2023
 - Then looked at the row above, on and below the row with the gear
 - Then found the digits in that row
 - Then checked if the x coordinate for that digit is on or within one of the gear's x coordinate
-- Finally, I saved the neighbors that met the criteria in a list. Any gears that had 2 neighbors were multipled together to find the result
+- Finally, I saved the neighbors that met the criteria in a list. Any gears that had 2 neighbors were multiplied together to find the result
 
 #### Tags
 - regex
@@ -66,7 +66,7 @@ https://adventofcode.com/2023
 - creating mapping with X Y coordinates
 
 ## Day 4
-- Parsing - The data is given to you as 'Card 1: 41 48 83 86 17 | 83 86  6 31 17  9 48 53'. I used the string function split and regex to separate that into
+- Parsing - The data is given to you as "Card 1: 41 48 83 86 17 | 83 86  6 31 17  9 48 53". I used the string function split and regex to separate that into
   - card ID - split by ':', then used regex to find the ID number
   - winning numbers - split by '|', winning numbers would be first group
   - my numbers - the numbers I had on the scratchcard would be in the 2nd group
@@ -92,3 +92,53 @@ https://adventofcode.com/2023
 - regex
 - sets
 - set intersection
+
+## Day 5
+I found this puzzle really difficult. 
+
+### Part 1
+- Even parsing this was difficult. I created a dictionary for the almanac which had seeds, then each mapping. The keys for each mapping were tuples with the ranges of values for that mapping.
+- The almanac dictionary should already be in order since I'm using python 3.10. However, instead of relying on that I created a tuple with each step. That way I could find the next step by the index in the tuple.
+- After creating the almanac, I created a recursive function to fetch the value for the next step (the destination).
+
+### Part 2
+- The number of seeds in each range is too large to go one-by-one and find the mappings like I did in part 1
+- I'm still trying to find the clever way to do this. Perhaps if I start at the end and work my back? The puzzle wants the minimum location. Could I find the minimum location, then work backward to find the seed?
+
+#### Tags
+- data structure
+- recursive functions
+
+## Day 6
+Like the previous day, part 2 of this puzzle is difficult and involves large numbers.
+
+### Part 1
+- *For each whole millisecond you spend at the beginning of the race holding down the button, the boat's speed increases by one millimeter per millisecond.* So you 'charge up' your speed at the beginning of the race, then continue at that speed until time expires.
+  - ```distance = (time - speed) * speed```
+- The numbers were small enough that I could go through each speed in the range to see if it would beat the distance record
+- Used a list comprehension to find all speeds in range of times which would beat the distance record
+- Used ```np.prod``` to find the product of a list of values
+
+### Part 2
+- I used the 'brute force' approach which made part 2 very similar to part 1. 
+  - The values are much larger than part 1, so it will take longer to solve.
+  - However, it didn't take *that* long to run, much less time than trying to brute force part 2 from day 5. 
+- Removed the list comprehension from part 1. Part 2 just needs the total count of ways to win. I don't want to store a list with millions of numbers just to later get the length of that list.  
+- There is a better way to solve this, but I haven't figured it out yet. Here are my thoughts on other solutions:
+  - I found the derivative of the equation, then set it equal to 0 to find the max speed. Basically, you speed up for half the time. 
+    ``` 
+        d = (t - s) * s
+        d = t*s - s**2
+        d' = t - 2s
+        d'' = -2
+        speed to get max distance = t/2
+    ```
+  - What speed do I need to go in order to beat that distance record?
+  - I've been using 'speed' in these equations. Speed is really just ```distance / time``` though. Does that help?
+- Later I will look at other solutions to see what I can learn from them
+
+#### Tags
+- math
+- numpy
+- regex
+- list comprehension 
