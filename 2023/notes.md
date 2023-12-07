@@ -142,3 +142,59 @@ Like the previous day, part 2 of this puzzle is difficult and involves large num
 - numpy
 - regex
 - list comprehension 
+
+## Day 7
+
+### Part 1
+- I assigned a letter value to each card in order of the card's value. That way I can sort alphabetically. 
+   ```python
+  from string import ascii_uppercase
+  card_vals = dict(zip('AKQJT98765432', ascii_uppercase))
+  ```
+  - 'KKA77' should come before 'KK7AA' since A has a higher value than 7
+  - When I map the card values to letters, these cards would become 'BBAHH' and 'BBHAA' and will sort correctly
+- Used ```Counter``` from Collections to get the count for each card in the hand
+- From ```Counter``` I can find the number of unique cards and maximum value of a single card. That allows me to classify each hand.
+
+| **Hand Type** | **Unique Cards** | **Max Value of Single Card** |
+|---------------|------------------|------------------------------|
+| high card     | 5                | 1                            |
+| pair          | 4                | 2                            |
+| two pair      | 3                | 2                            |
+| 3 of a kind   | 3                | 3                            |
+| full house    | 2                | 3                            |
+| 4 of a kind   | 2                | 4                            |
+| 5 of a kind   | 1                | 5                            |
+
+- I needed to sort the hands by 
+  1. number of unique cards ascending 
+  2. max value of single card descending
+  3. alphabetical value I assigned to the cards to sort
+- Python retains previous sorting which allows me to do multiple sorts, starting with the least important. This is really helpful when sorting by multiple items, some ascending, some descending. 
+```python 
+    poker_round = sorted(poker_round, key=lambda x: x[4])                   # sort by card_sort, ascending
+    poker_round = sorted(poker_round, key=lambda x: x[3], reverse=True)     # sort by max value of card, descending
+    poker_round = sorted(poker_round, key=lambda x: x[2])                   # sort by number of unique cards, ascending
+```
+
+### Part 2
+- In part 2, 'J' is now a wildcard i.e. it can be used as any card. That means that:
+  - If you have a J in your hand, the number of unique cards should decrease by 1 and 
+  - For each J in your hand, the max value of a single card should increase by 1
+- Also, J is now the least valuable card, so need to adjust the sorting
+  - ```card_vals = dict(zip('AKQT98765432J', ascii_uppercase))```
+- One tricky part is that there can be hands with all jokers 'JJJJJ'. That caused me to 
+  - Add 0 to the list in the line below so the list would not be empty and throw an error when finding max 
+    ```python 
+    max_value_of_card = max([val for card, val in card_count.items() if card != 'J'] + [0])
+    ```
+  - Ensure that the unique_card_count is at least 1 
+    ```python
+    unique_card_count = max(unique_card_count, 1)
+    ```
+
+#### Tags
+- Counter
+- complex sorting
+- sort by multiple values 
+- lambda

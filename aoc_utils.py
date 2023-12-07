@@ -30,7 +30,7 @@ def get_input(day_num: int = date.today().day, year: int = date.today().year, te
     else:
         with open(Path.cwd() / 'aoc_cookies.json') as f:
             aoc_cookies = json.load(f)
-        res = requests.get(f"https://adventofcode.com/{year}/day/{day_num}/input", verify=False, cookies=aoc_cookies)
+        res = requests.get(f"https://adventofcode.com/{year}/day/{day_num}/input", cookies=aoc_cookies)
         assert res.ok, f"{res.status_code}\n{res.text}"
         data = res.text.strip()
         with open(file_path, 'w') as f:
@@ -38,22 +38,30 @@ def get_input(day_num: int = date.today().day, year: int = date.today().year, te
     return data
 
 
-def submit_answer(part: int, answer, day_num: int = date.today().day, year: int = date.today().year):
+def submit_answer(answer_1=None, answer_2=None, day_num: int = date.today().day, year: int = date.today().year, submit=False):
     """
-    Submits the answer for parameters provided
+    Submits the answer(s) or, if submit=False, prints the answer(s) to the terminal
 
     Args:
-        part (int): Either part 1 or part 2
-        answer: The answer to be submitted
+        answer_1: The answer to part 1 of the puzzle
+        answer_2: The answer to part 2 of the puzzle
         day_num (int): Day number (i.e. 1 for the first, 2 for the second, etc.), defaults to current day number
         year (int): Year in YYYY format, defaults to current year
+        submit (bool): Should the answer(s) be submitted to AoC? If not, they will be printed to the terminal.
     """
-    print(f"Part {part} answer to submit:\n\n{answer}\n\n")
-    with open('aoc_cookies.json') as f:
-        aoc_cookies = json.load(f)
-    res = requests.post(f"https://adventofcode.com/{year}/day/{day_num}/answer",
-                        data={'level': part, 'answer': answer},
-                        verify=False, cookies=aoc_cookies)
-    assert res.ok, f"{res.status_code}\n{res.text}"
-    soup = BeautifulSoup(res.text, 'html.parser')
-    print(soup.text.strip())
+    if submit:
+        with open('aoc_cookies.json') as f:
+            aoc_cookies = json.load(f)
+        if answer_2:
+            answer_data = {'level': 2, 'answer': answer_2}
+            print(f"Part 2 answer to submit:\n\n{answer_2}\n\n")
+        elif answer_1:
+            answer_data = {'level': 1, 'answer': answer_1}
+            print(f"Part 1 answer to submit:\n\n{answer_1}\n\n")
+        res = requests.post(f"https://adventofcode.com/{year}/day/{day_num}/answer", data=answer_data, cookies=aoc_cookies)
+        assert res.ok, f"{res.status_code}\n{res.text}"
+        soup = BeautifulSoup(res.text, 'html.parser')
+        print(soup.text.strip())
+    else:
+        print(answer_1)
+        print(answer_2)
