@@ -18,4 +18,4 @@ def part_2():
 if __name__ == '__main__':
     a1 = part_1()
     a2 = part_2()
-    submit_answer(answer_1=a1, answer_2=a2)
+    submit_answer(answer_1=a1, answer_2=a2, day_num=day_num)
