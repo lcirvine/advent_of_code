@@ -231,7 +231,7 @@ Like the previous day, part 2 of this puzzle is difficult and involves large num
   ```python
   step % len(instructions)
   ```
-- Originally, I found the next node in one line, but refactored it to a function for readability and so that I could use the function in part 2 (although that would prove to be ill advised)
+- Originally, I found the next node in one line, but refactored it to a function for readability and so that I could use the function in part 2
   ```python
   instr_map = {'L': 0, 'R': 1}
   node_map[current_node][instr_map[instructions[step % len(instructions)]]]
