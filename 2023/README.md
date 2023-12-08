@@ -1,11 +1,12 @@
-# :santa: Advent of Code 2023 :christmas_tree:
+# 🎅 Advent of Code 2023 🎄
+
 
 https://adventofcode.com/2023
 
 ---
-## Day 1 :snowflake:
+## Day 1 ⛔❄️
 
-[puzzle](https://adventofcode.com/2023/day/1), [code](https://github.com/lcirvine/advent_of_code/blob/master/2023/day1.py)
+[🧩](https://adventofcode.com/2023/day/1 "Puzzle")    [:octocat:](https://github.com/lcirvine/advent_of_code/blob/master/2023/day1.py "Code")
 
 ### Part 1
 
@@ -25,16 +26,21 @@ https://adventofcode.com/2023
   ```
 - Mapped word for number to digit (as a string) ```{'one': '1', 'two': '2'...}```
 
-#### Tags
+### Tags
 - regex
 - regex with multiple groups 
 - regex with positive lookahead
 - nested list comprehension
 
----
-# Day 2 :gift:
+### Feelings about today's puzzles
+| **Part 1** | **Part 2** |
+|------------|------------|
+| 😃|😨|
 
-[puzzle](https://adventofcode.com/2023/day/2), [code](https://github.com/lcirvine/advent_of_code/blob/master/2023/day2.py)
+---
+# Day 2 🧊
+
+[🧩](https://adventofcode.com/2023/day/2 "Puzzle")    [:octocat:](https://github.com/lcirvine/advent_of_code/blob/master/2023/day2.py "Code")
 
 ## Part 1
 - To find which games are possible, you only need to find the max number of cubes of each color
@@ -44,13 +50,18 @@ https://adventofcode.com/2023
 - Most of the work was already done since I already found the max number for each color
 - All I needed to do in part 2 was multiply those numbers together for each game
 
-#### Tags
+### Tags
 - regex
 
----
-## Day 3 :wrench:
+### Feelings about today's puzzles
+| **Part 1** | **Part 2** |
+|------------|------------|
+| 😃|😂|
 
-[puzzle](https://adventofcode.com/2023/day/3), [code](https://github.com/lcirvine/advent_of_code/blob/master/2023/day3.py)
+---
+## Day 3 ⚙️
+
+[🧩](https://adventofcode.com/2023/day/3 "Puzzle")    [:octocat:](https://github.com/lcirvine/advent_of_code/blob/master/2023/day3.py "Code")
 
 - When parsing the data I created 
   - a list of special characters - special characters were anything that is not a digit, '.', or new line character
@@ -72,15 +83,20 @@ https://adventofcode.com/2023
 - Then checked if the x coordinate for that digit is on or within one of the gear's x coordinate
 - Finally, I saved the neighbors that met the criteria in a list. Any gears that had 2 neighbors were multiplied together to find the result
 
-#### Tags
+### Tags
 - regex
 - regex finditer to find multiple matches
 - creating mapping with X Y coordinates
 
----
-## Day 4 :credit_card:
+### Feelings about today's puzzles
+| **Part 1** | **Part 2** |
+|------------|------------|
+|🤔👌|🤔😕😅|
 
-[puzzle](https://adventofcode.com/2023/day/4), [code](https://github.com/lcirvine/advent_of_code/blob/master/2023/day4.py)
+---
+## Day 4 💳
+
+[🧩](https://adventofcode.com/2023/day/4 "Puzzle")    [:octocat:](https://github.com/lcirvine/advent_of_code/blob/master/2023/day4.py "Code")
 
 - Parsing - The data is given to you as "Card 1: 41 48 83 86 17 | 83 86  6 31 17  9 48 53". I used the string function split and regex to separate that into
   - card ID - split by ':', then used regex to find the ID number
@@ -101,7 +117,7 @@ https://adventofcode.com/2023
           increment_winners(card_won)
     ```
 
-#### Tags
+### Tags
 - recursion
 - recursive functions
 - data structure
@@ -109,10 +125,15 @@ https://adventofcode.com/2023
 - sets
 - set intersection
 
----
-## Day 5 :seedling:
+### Feelings about today's puzzles
+| **Part 1** | **Part 2** |
+|------------|------------|
+|:relaxed:|🤨|
 
-[puzzle](https://adventofcode.com/2023/day/5), [code](https://github.com/lcirvine/advent_of_code/blob/master/2023/day5.py)
+---
+## Day 5 🌱
+
+[🧩](https://adventofcode.com/2023/day/5 "Puzzle")    [:octocat:](https://github.com/lcirvine/advent_of_code/blob/master/2023/day5.py "Code")
 
 I found this puzzle really difficult. 
 
@@ -125,14 +146,19 @@ I found this puzzle really difficult.
 - The number of seeds in each range is too large to go one-by-one and find the mappings like I did in part 1
 - I'm still trying to find the clever way to do this. Perhaps if I start at the end and work my back? The puzzle wants the minimum location. Could I find the minimum location, then work backward to find the seed?
 
-#### Tags
+### Tags
 - data structure
 - recursive functions
 
----
-## Day 6 :speedboat:
+### Feelings about today's puzzles
+| **Part 1** | **Part 2** |
+|------------|------------|
+|😢|😭 :rage3: ⌛|
 
-[puzzle](https://adventofcode.com/2023/day/6), [code](https://github.com/lcirvine/advent_of_code/blob/master/2023/day6.py)
+---
+## Day 6 🚤
+
+[🧩](https://adventofcode.com/2023/day/6 "Puzzle")    [:octocat:](https://github.com/lcirvine/advent_of_code/blob/master/2023/day6.py "Code")
 
 Like the previous day, part 2 of this puzzle is difficult and involves large numbers.
 
@@ -161,16 +187,22 @@ Like the previous day, part 2 of this puzzle is difficult and involves large num
   - I've been using 'speed' in these equations. Speed is really just ```distance / time``` though. Does that help?
 - Later I will look at other solutions to see what I can learn from them
 
-#### Tags
+### Tags
 - math
 - numpy
 - regex
 - list comprehension 
 
----
-## Day 7 :camel: :flower_playing_cards:
+### Feelings about today's puzzles
+| **Part 1** | **Part 2** |
+|------------|------------|
+|😃|😥😌 :shipit: |
 
-[puzzle](https://adventofcode.com/2023/day/7), [code](https://github.com/lcirvine/advent_of_code/blob/master/2023/day7.py)
+
+---
+## Day 7 🐫🎴
+
+[🧩](https://adventofcode.com/2023/day/7 "Puzzle")    [:octocat:](https://github.com/lcirvine/advent_of_code/blob/master/2023/day7.py "Code")
 
 ### Part 1
 - I assigned a letter value to each card in order of the card's value. That way I can sort alphabetically. 
@@ -220,16 +252,21 @@ Like the previous day, part 2 of this puzzle is difficult and involves large num
     unique_card_count = max(unique_card_count, 1)
     ```
 
-#### Tags
+### Tags
 - Counter
 - complex sorting
 - sort by multiple values 
 - lambda
 
----
-## Day 8 :ghost:
+### Feelings about today's puzzles
+| **Part 1** | **Part 2** |
+|------------|------------|
+|🤓|🙂|
 
-[puzzle](https://adventofcode.com/2023/day/8), [code](https://github.com/lcirvine/advent_of_code/blob/master/2023/day8.py)
+---
+## Day 8 👻🗺️
+
+[🧩](https://adventofcode.com/2023/day/8 "Puzzle")    [:octocat:](https://github.com/lcirvine/advent_of_code/blob/master/2023/day8.py "Code")
 
 ### Part 1
 - Parsed the input into a string of instructions and a dictionary with the nodes as keys and the value as a tuple with left and right destination nodes
@@ -275,10 +312,48 @@ Like the previous day, part 2 of this puzzle is difficult and involves large num
   - Let's say that A1 could reach Z1 and Z2 but the number of steps for Z1 is less than the number of steps for Z2. A1 would reach Z1 first so that number of steps is returned. But what if Z2 has a lower LCM with the other A steps?
   - The puzzle does say *the number of nodes with names ending in A is equal to the number ending in Z* so in this case there is probably just one Z for every A
 
-#### Tags
+### Tags
 - modulo
 - data structure 
 - map function
 - list unpacking
 - math 
-- lcm (least common multiple) 
+- lcm (least common multiple)
+
+### Feelings about today's puzzles
+| **Part 1** | **Part 2** |
+|------------|------------|
+|😄|😕😌🤓|
+
+
+
+
+
+
+
+
+
+---
+---
+---
+## Template - Day XYZ
+
+[🧩](https://adventofcode.com/2023/day/XYZ "Puzzle")    [:octocat:](https://github.com/lcirvine/advent_of_code/blob/master/2023/dayXYZ.py "Code")
+
+### Part 1
+
+- 
+
+### Part 2
+
+- 
+
+### Tags
+- 
+
+### Feelings about today's puzzles
+| **Part 1** | **Part 2** |
+|------------|------------|
+| ||
+
+[🐱](https://github-emoji-picker.rickstaa.dev/, "Emoji Picker")
