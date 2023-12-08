@@ -1,8 +1,9 @@
-# Advent of Code 2023 Notes
+# :santa: Advent of Code 2023 :christmas_tree:
 
 https://adventofcode.com/2023
 
-## Day 1 
+---
+## Day 1 :snowflake:
 
 [puzzle](https://adventofcode.com/2023/day/1), [code](https://github.com/lcirvine/advent_of_code/blob/master/2023/day1.py)
 
@@ -30,7 +31,8 @@ https://adventofcode.com/2023
 - regex with positive lookahead
 - nested list comprehension
 
-# Day 2
+---
+# Day 2 :gift:
 
 [puzzle](https://adventofcode.com/2023/day/2), [code](https://github.com/lcirvine/advent_of_code/blob/master/2023/day2.py)
 
@@ -45,7 +47,8 @@ https://adventofcode.com/2023
 #### Tags
 - regex
 
-## Day 3
+---
+## Day 3 :wrench:
 
 [puzzle](https://adventofcode.com/2023/day/3), [code](https://github.com/lcirvine/advent_of_code/blob/master/2023/day3.py)
 
@@ -74,7 +77,8 @@ https://adventofcode.com/2023
 - regex finditer to find multiple matches
 - creating mapping with X Y coordinates
 
-## Day 4
+---
+## Day 4 :credit_card:
 
 [puzzle](https://adventofcode.com/2023/day/4), [code](https://github.com/lcirvine/advent_of_code/blob/master/2023/day4.py)
 
@@ -105,7 +109,8 @@ https://adventofcode.com/2023
 - sets
 - set intersection
 
-## Day 5
+---
+## Day 5 :seedling:
 
 [puzzle](https://adventofcode.com/2023/day/5), [code](https://github.com/lcirvine/advent_of_code/blob/master/2023/day5.py)
 
@@ -124,7 +129,8 @@ I found this puzzle really difficult.
 - data structure
 - recursive functions
 
-## Day 6
+---
+## Day 6 :speedboat:
 
 [puzzle](https://adventofcode.com/2023/day/6), [code](https://github.com/lcirvine/advent_of_code/blob/master/2023/day6.py)
 
@@ -161,7 +167,8 @@ Like the previous day, part 2 of this puzzle is difficult and involves large num
 - regex
 - list comprehension 
 
-## Day 7
+---
+## Day 7 :camel: :flower_playing_cards:
 
 [puzzle](https://adventofcode.com/2023/day/7), [code](https://github.com/lcirvine/advent_of_code/blob/master/2023/day7.py)
 
@@ -219,7 +226,8 @@ Like the previous day, part 2 of this puzzle is difficult and involves large num
 - sort by multiple values 
 - lambda
 
-## Day 8
+---
+## Day 8 :ghost:
 
 [puzzle](https://adventofcode.com/2023/day/8), [code](https://github.com/lcirvine/advent_of_code/blob/master/2023/day8.py)
 
