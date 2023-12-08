@@ -198,3 +198,57 @@ Like the previous day, part 2 of this puzzle is difficult and involves large num
 - complex sorting
 - sort by multiple values 
 - lambda
+
+## Day 8
+
+### Part 1
+- Parsed the input into a string of instructions and a dictionary with the nodes as keys and the value as a tuple with left and right destination nodes
+- For part 1, I started at node AAA and cycle through the directions until you end at ZZZ
+- You get the destination node from the node_map dictionary created when parsing the data
+- One tricky part is that if you get to the end of the instructions without reaching node ZZZ, you start over at the beginning of the instructions. You can overcome that by using modulo.
+  ```python
+  step % len(instructions)
+  ```
+- Originally, I found the next node in one line, but refactored it to a function for readability and so that I could use the function in part 2 (although that would prove to be ill advised)
+  ```python
+  instr_map = {'L': 0, 'R': 1}
+  node_map[current_node][instr_map[instructions[step % len(instructions)]]]
+  ```
+  ```python 
+  def next_node(current_node: str, step: int):
+      instr_num = step % len(instructions)
+      instr = instructions[instr_num]
+      instr_map = {'L': 0, 'R': 1}
+      next_node_num = instr_map[instr]
+      return node_map[current_node][next_node_num]
+  ```
+
+### Part 2
+- In part 2 I needed to find how many steps it takes for A nodes (all nodes that end with A) to reach Z nodes (all nodes that end with Z)
+- My first attempt at solving part 2 was the 'brute force' approach. However, running that would take a **very** long time.
+  ```python 
+  def part_2():
+      nodes = [n for n in node_map if n.endswith('A')]
+      steps = 0
+      all_z = False
+      while not all_z:
+          nodes = list(map(next_node, nodes, [steps for n in nodes]))
+          steps += 1
+          all_z = all([n.endswith('Z') for n in nodes])
+      return steps
+  ```
+- Instead, I looked at how many steps would it take for each A node to reach a Z node
+- I modified my part 1 function to take in arguments and set the defaults so that part 1 would still work 
+- I saved the nodes and steps in a dictionary, although I could have just saved the number of steps for each in a list
+- The A nodes need to reach the Z nodes *at the same time*. That means I need to find the least common multiple (LCM) for the number of steps for each A node. 
+  - This may not work if an A node could reach multiple Z nodes. 
+  - Let's say that A1 could reach Z1 and Z2 but the number of steps for Z1 is less than the number of steps for Z2. A1 would reach Z1 first so that number of steps is returned. But what if Z2 has a lower LCM with the other A steps?
+  - The puzzle does say *the number of nodes with names ending in A is equal to the number ending in Z* so in this case there is probably just one Z for every A
+
+#### Tags
+- modulo
+- data structure 
+- map function
+- list unpacking
+- math 
+- lcm (least common multiple) 

@@ -1,3 +1,5 @@
+from typing import Union
+import math
 import sys
 sys.path.append('..')
 from aoc_utils import get_input, submit_answer
@@ -20,24 +22,23 @@ def next_node(current_node: str, step: int):
     return node_map[current_node][next_node_num]
 
 
-def part_1():
-    node = 'AAA'
+def part_1(node: str = 'AAA', destination: Union[str, list] = 'ZZZ'):
+    if isinstance(destination, str):
+        destination = [destination]
     steps = 0
-    while node != 'ZZZ':
+    while node not in destination:
         node = next_node(node, steps)
         steps += 1
     return steps
 
 
 def part_2():
-    nodes = [n for n in node_map if n.endswith('A')]
-    steps = 0
-    all_z = False
-    while not all_z:
-        nodes = list(map(next_node, nodes, [steps for n in nodes]))
-        steps += 1
-        all_z = all([n.endswith('Z') for n in nodes])
-    return steps
+    a_nodes = [n for n in node_map if n.endswith('A')]
+    z_nodes = [n for n in node_map if n.endswith('Z')]
+    a_node_steps = {}
+    for node in a_nodes:
+        a_node_steps[node] = part_1(node, z_nodes)
+    return math.lcm(*a_node_steps.values())
 
 
 if __name__ == '__main__':
