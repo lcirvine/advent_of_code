@@ -1,5 +1,5 @@
 ---
-## Template - Day XYZ
+## Day XYZ
 
 [🧩](https://adventofcode.com/2023/day/XYZ "Puzzle")    [:octocat:](https://github.com/lcirvine/advent_of_code/blob/master/2023/dayXYZ.py "Code")
 
