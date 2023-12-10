@@ -324,36 +324,34 @@ Like the previous day, part 2 of this puzzle is difficult and involves large num
 | **Part 1** | **Part 2** |
 |------------|------------|
 |😄|😕😌🤓|
-
-
-
-
-
-
-
-
-
 ---
----
----
-## Template - Day XYZ
 
-[🧩](https://adventofcode.com/2023/day/XYZ "Puzzle")    [:octocat:](https://github.com/lcirvine/advent_of_code/blob/master/2023/dayXYZ.py "Code")
+## Day 9 :desert_island:
+
+[🧩](https://adventofcode.com/2023/day/9 "Puzzle")    [:octocat:](https://github.com/lcirvine/advent_of_code/blob/master/2023/day9.py "Code")
 
 ### Part 1
-
-- 
+- To find the next number in the sequence, find the differences between a set of numbers and then find the difference of the differences until the differences are all 0 (hopefully that make sense)
+- Created a recursive function to find the differences between numbers in the list, then passed the differences back into the list until all the differences were zero.
+- You could actually stop one loop earlier when the differences were all the same number. I debated between using groupby to see if all the numbers were the same or checking if all numbers were zero. 
+  ```python
+  len(list(groupby(diffs))) == 1
+  ```
+  ```python
+  all([d == 0 for d in diffs])
+  ```
+- I figured out that the sum of the last differences would be added on to the next number
 
 ### Part 2
 
-- 
+- I thought part 2 would be easy, I could just subtract the sum of differences from the first number in the sequence
+- After writing the numbers down on paper, I figured out the pattern. Instead of adding up all the differences, you subtract every other one. Why does this work? No idea. But it works.
 
 ### Tags
-- 
+- recursion
+- recursive function
 
 ### Feelings about today's puzzles
-| **Part 1** | **Part 2** |
-|------------|------------|
-| ||
-
-[🐱](https://github-emoji-picker.rickstaa.dev/, "Emoji Picker")
+| **Part 1** | **Part 2**             |
+|------------|------------------------|
+|:smile:| :monocle_face: :blush: |
