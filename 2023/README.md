@@ -355,3 +355,26 @@ Like the previous day, part 2 of this puzzle is difficult and involves large num
 | **Part 1** | **Part 2**             |
 |------------|------------------------|
 |:smile:| :monocle_face: :blush: |
+
+---
+## Day 10 :world_map:
+
+[🧩](https://adventofcode.com/2023/day/10 "Puzzle")    [:octocat:](https://github.com/lcirvine/advent_of_code/blob/master/2023/day10.py "Code")
+
+### Part 1
+
+- Currently, my code is pretty convoluted. I've tried to solve this puzzle a few different ways and made some mistakes along the way. This puzzle is still a work in progress for me.
+- I'm able to navigate the maze now and I can solve the test input. However, I get recursion errors when I try to run my code on the actual input. 
+
+### Part 2
+
+- 
+
+### Tags
+- creating mapping with X Y coordinates
+- recursion
+
+### Feelings about today's puzzles
+| **Part 1** | **Part 2** |
+|------------|------------|
+|:confounded:||
