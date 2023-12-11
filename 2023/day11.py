@@ -52,7 +52,7 @@ def find_galaxies(arr: np.ndarray, galaxy_char: str = '#'):
     for row_num, row in enumerate(arr):
         for col_num, char in enumerate(row):
             if char == galaxy_char:
-                galaxies.append((row_num, col_num))
+                galaxies.append((col_num, row_num))
     return galaxies
 
 
@@ -81,12 +81,14 @@ def part_2():
         g2x, g2y = galaxy_combo[1]
         x_dist = abs(g2x - g1x)
         xsorted = sorted((g2x, g1x))
-        xcrosses = [x for x in empty_cols if x in range(xsorted[0], xsorted[1])]
-        x_dist += expansion_dist * len(xcrosses)
+        xcrosses = len([x for x in empty_cols if x in range(xsorted[0], xsorted[1])])
+        # already counted the original distance, so subtracting 1 from expansion distance
+        x_dist += (expansion_dist - 1) * xcrosses
         y_dist = abs(g2y - g1y)
         ysorted = sorted((g2y, g1y))
-        ycrosses = [y for y in empty_rows if y in range(ysorted[0], ysorted[1])]
-        y_dist += expansion_dist * len(ycrosses)
+        ycrosses = len([y for y in empty_rows if y in range(ysorted[0], ysorted[1])])
+        # already counted the original distance, so subtracting 1 from expansion distance
+        y_dist += (expansion_dist - 1) * ycrosses
         total_dist += sum((x_dist, y_dist))
     return total_dist
 
@@ -94,4 +96,4 @@ def part_2():
 if __name__ == '__main__':
     a1 = part_1()
     a2 = part_2()
-    submit_answer(answer_1=a1, answer_2=a2, day_num=day_num)
+    submit_answer(answer_1=a1, answer_2=a2, day_num=day_num, submit=True)

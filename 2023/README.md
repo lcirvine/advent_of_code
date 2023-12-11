@@ -414,7 +414,7 @@ Like the previous day, part 2 of this puzzle is difficult and involves large num
 - In part 2 the empty spaces expand by 1,000,000 rather than just 1. That makes it too large to put into an array
 - Since I can find the empty rows and columns, I should be able to tell when a pair of galaxies cross that empty row/column
 - The total distance for that pair should increase by 1M * number of crosses of empty rows/columns
-- This hasn't quite worked on the test data, however, so part 2 is still a work in progress at the moment
+- I did have a bug related to the expansion distance variable. I already counted the original distance, so my expansion distance needed to decrease by 1
 
 ### Tags
 - numpy
