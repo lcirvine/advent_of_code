@@ -34,7 +34,7 @@ def find_prev_num(nums: list, first_diffs=None):
 def part_1():
     next_nums = []
     for r in readings:
-        next_nums.append(r[-1] - find_next_num(r))
+        next_nums.append(r[-1] + find_next_num(r))
     return sum(next_nums)
 
 
