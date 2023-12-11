@@ -378,3 +378,49 @@ Like the previous day, part 2 of this puzzle is difficult and involves large num
 | **Part 1** | **Part 2** |
 |------------|------------|
 |:confounded:||
+
+---
+## Day 11 :stars: :milky_way:
+
+[🧩](https://adventofcode.com/2023/day/11 "Puzzle")    [:octocat:](https://github.com/lcirvine/advent_of_code/blob/master/2023/day11.py "Code")
+
+### Part 1
+
+- In this puzzle, you need to find the distances between points (galaxies in the puzzle setup). But the catch is that the map expands if there are no points in the row or column.
+- In part one I created a numpy array from the puzzle data.
+- I created a few helper functions to 
+  - find the empty rows and columns - rows and columns that didn't have a galaxy 
+  - expand the universe - add more empty spaces to the array in empty rows and columns
+  - print the array - this helped during testing to make sure my expanded array looked like the example
+- When finding the pairs of galaxies, later galaxies should already be paired with previous galaxies (i.e. galaxy 1 pairs with galaxies 2-9, galaxy 2 pairs with galaxies 3-9 since there's already a 1,2 pairing) 
+  - To find the pairs of galaxies, I originally used this code
+  ```python
+  for i in range(len(galaxies)):
+      dist = sum([abs(galaxies[i][0] - gx[0]) + abs(galaxies[i][1] - gx[1]) for gx in galaxies[i:]])
+      total_dist += dist
+  ``` 
+  - But replaced it with combinations from itertools which looks much cleaner
+  ```python
+  for galaxy_combo in combinations(galaxies, 2):
+      g1x, g1y = galaxy_combo[0]
+      g2x, g2y = galaxy_combo[1]
+      dist = abs(g2x - g1x) + abs(g2y - g1y)
+      total_dist += dist
+  ```
+- Finally, finding the distance between two galaxies was just finding the absolute value between the X values and the absolute value between the Y values
+
+### Part 2
+
+- In part 2 the empty spaces expand by 1,000,000 rather than just 1. That makes it too large to put into an array
+- Since I can find the empty rows and columns, I should be able to tell when a pair of galaxies cross that empty row/column
+- The total distance for that pair should increase by 1M * number of crosses of empty rows/columns
+- This hasn't quite worked on the test data, however, so part 2 is still a work in progress at the moment
+
+### Tags
+- numpy
+- itertools combinations
+
+### Feelings about today's puzzles
+| **Part 1** | **Part 2** |
+|------------|------------|
+|:slightly_smiling_face:|:raised_eyebrow:|
