@@ -424,3 +424,24 @@ Like the previous day, part 2 of this puzzle is difficult and involves large num
 | **Part 1** | **Part 2** |
 |------------|------------|
 |:slightly_smiling_face:|:raised_eyebrow:|
+
+---
+## Day 12
+
+[🧩](https://adventofcode.com/2023/day/12 "Puzzle")    [:octocat:](https://github.com/lcirvine/advent_of_code/blob/master/2023/day12.py "Code")
+
+### Part 1
+
+- 
+
+### Part 2
+
+- 
+
+### Tags
+- 
+
+### Feelings about today's puzzles
+| **Part 1** | **Part 2** |
+|------------|------------|
+|||
