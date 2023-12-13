@@ -15,23 +15,31 @@ def part_1():
         springs = springs.strip('.')
         group_nums = [int(x) for x in group_nums.split(',')]
 
-        # there are num_s characters in the springs
-        num_s = len(springs)
-        # there are num_s_dam functional springs
-        num_s_fct = sum(group_nums)
+        # s_wrk = [mo for mo in re.finditer(r"(\.*)", springs) if mo.group()]
+        # s_dam = [mo for mo in re.finditer(r"(#*)", springs) if mo.group()]
+        # s_unk = [mo for mo in re.finditer(r"(\?*)", springs) if mo.group()]
 
-        s_opp = [mo for mo in re.finditer(r"(\.*)", row) if mo.group()]
-        s_dam = [mo for mo in re.finditer(r"(#*)", row) if mo.group()]
-        s_dam = [mo for mo in re.finditer(r"(\?*)", row) if mo.group()]
+        n_wrk = len([s for s in re.findall(r"(\.*)", springs) if s != ''])
+        n_dam = len([s for s in re.findall(r"(\#*)", springs) if s != ''])
+        n_unk = len([s for s in re.findall(r"(\?*)", springs) if s != ''])
 
+        ways = n_unk - (sum(group_nums) - n_dam) - (len(group_nums) - n_wrk) + 1
 
-        # there are num_s_fct_group groups of functional springs
-        num_s_fct_group = len(s_fct)
-        # there are
-        num_s_dam = len(s_dam)
+        total_dam = sum(group_nums)
+        missing_dam = total_dam - len(s_dam)
 
 
+def test(row: str):
+    springs, group_nums = row.split()
+    # removing '.' from ends
+    springs = springs.strip('.')
+    group_nums = [int(x) for x in group_nums.split(',')]
 
+    g_wrk = len([s for s in re.findall(r"(\.*)", springs) if s != ''])
+    n_dam = len([s for s in re.findall(r"(\#)", springs) if s != ''])
+    n_unk = len([s for s in re.findall(r"(\?)", springs) if s != ''])
+
+    return n_unk - (sum(group_nums) - n_dam) - (len(group_nums) - g_wrk) + 1
 
 
 
