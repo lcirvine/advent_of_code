@@ -426,22 +426,71 @@ Like the previous day, part 2 of this puzzle is difficult and involves large num
 |:slightly_smiling_face:|:raised_eyebrow:|
 
 ---
-## Day 12
+## Day 12 :hotsprings:
 
 [🧩](https://adventofcode.com/2023/day/12 "Puzzle")    [:octocat:](https://github.com/lcirvine/advent_of_code/blob/master/2023/day12.py "Code")
 
 ### Part 1
 
-- 
+- I'm finding this one really difficult.
+- spring_cond_map = {'.': 'operational', '#': 'damaged', '?': 'unknown'}
+- I can use regex to find the number of instances of each type, or the groups of each type, or `re.finditer` to find the match objects which include the span
+  ```python 
+  n_unk = len([s for s in re.findall(r"(\?)", springs) if s != ''])
+  g_unk = len([s for s in re.findall(r"(\?*)", springs) if s != ''])
+  g_unk = [s for s in re.finditer(r"(\?*)", springs) if s]
+  ```
+- I feel like I'm close to figuring it out. There should be a relationship between the numbers/groups of '#', '.' and '?'
+- Here's what I know
+  - The unknowns (?) have to be either damaged (#) or functional (.)
+  - Groups of damaged springs (#) have to be separated by functional springs (.) or a group of functional springs (...)
+  - I stripped out any '.' from the ends of the springs, these shouldn't matter
+  - So the number of groups of functional springs (.) has to be one less than the number of groups of damaged springs (#) which is given for each row
+- I've tried taking the number of unknowns - the damaged springs I know of - the number of groups of functional springs. Does that leave the number of ways that work? 
 
 ### Part 2
 
 - 
 
 ### Tags
-- 
+- regex
 
 ### Feelings about today's puzzles
 | **Part 1** | **Part 2** |
 |------------|------------|
-|||
+|:confounded:||
+
+---
+## Day 13 :mirror:
+
+[🧩](https://adventofcode.com/2023/day/13 "Puzzle")    [:octocat:](https://github.com/lcirvine/advent_of_code/blob/master/2023/day13.py "Code")
+
+### Part 1
+
+- I feel like numpy was a good choice to use on today's puzzle, Numpy has functions like `np.flip` which allowed me to flip the array and compare its mirror image
+- First I created an array from the pattern. 
+- Then I looped through each row and column to compare it to the next row/column. I used `np.array_equal` to determine if they matched.
+- If they did match, I split them into two different arrays and flipped one using `np.flip` so that the first row/column was the same for both arrays
+- Then I trimmed the arrays so that they had equal numbers of rows/columns
+- Finally, I compared the resulting arrays again using `np.array_equal` and added to the score if the arrays were equal 
+
+### Part 2
+
+- In part 2 one of the items is the opposite type. The one difference can be anywhere, even in the row/column with the reflection point.
+- Rather than going through and updating the character from '.' to '#', I tried to do a similar comparison, but now look for 1 difference instead of being equal
+- If you use `==` to compare the arrays, numpy returns an array of True or False values. If you get the sum of that array, each True value equals 1 and False values equal 0. If there is exactly one difference, the sum of those true values will be one less than `numpy.ndarray.size`
+  ```python
+  diffs_with_next_row = patarr[r].size - np.sum(patarr[r] == patarr[r + 1])
+  ```
+- If the difference was in the reflection row/column, it should not be counted twice when comparing the arrays for differences
+  ```python
+  diffs += (diffs_in_mirrored_arrays - diffs_with_next_row)
+  ```
+
+### Tags
+- numpy
+
+### Feelings about today's puzzles
+| **Part 1**  | **Part 2** |
+|-------------|------------|
+|:relaxed:| :thinking: :neckbeard: |
