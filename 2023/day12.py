@@ -11,27 +11,30 @@ def part_1():
     spring_cond_map = {'.': 'operational', '#': 'damaged', '?': 'unknown'}
     for row in data.splitlines():
         springs, group_nums = row.split()
-        # removing '.' from ends
         springs = springs.strip('.')
         group_nums = [int(x) for x in group_nums.split(',')]
 
-        # s_wrk = [mo for mo in re.finditer(r"(\.*)", springs) if mo.group()]
-        # s_dam = [mo for mo in re.finditer(r"(#*)", springs) if mo.group()]
-        # s_unk = [mo for mo in re.finditer(r"(\?*)", springs) if mo.group()]
+        g_wrk = len([s for s in re.findall(r"(\.*)", springs) if s != ''])
+        n_dam = len([s for s in re.findall(r"(\#)", springs) if s != ''])
+        n_unk = len([s for s in re.findall(r"(\?)", springs) if s != ''])
+        g_unk = len([s for s in re.findall(r"(\?*)", springs) if s != ''])
 
-        n_wrk = len([s for s in re.findall(r"(\.*)", springs) if s != ''])
-        n_dam = len([s for s in re.findall(r"(\#*)", springs) if s != ''])
-        n_unk = len([s for s in re.findall(r"(\?*)", springs) if s != ''])
+        # the unknowns have to be either damaged (#) or functional (.)
+        # groups of damaged springs (#) have to be separated by functional springs (.)
+        # number of groups of '#' is given as the len(group_nums), minus 1 because we want number of '.' between groups
+        # number of unknowns - remaining damaged - number of groups of functional + 1 to get number of ways
 
-        ways = n_unk - (sum(group_nums) - n_dam) - (len(group_nums) - n_wrk) + 1
+        # ways = n_unk - (sum(group_nums) - n_dam) - (len(group_nums) - g_wrk - 1) + 1
 
-        total_dam = sum(group_nums)
-        missing_dam = total_dam - len(s_dam)
+        dam_remaining = sum(group_nums) - n_dam
+        group_wrk_remaining = len(group_nums) - g_wrk - 1
+
+        ways = n_unk - dam_remaining - group_wrk_remaining
+        print(ways)
 
 
 def test(row: str):
     springs, group_nums = row.split()
-    # removing '.' from ends
     springs = springs.strip('.')
     group_nums = [int(x) for x in group_nums.split(',')]
 
@@ -39,8 +42,12 @@ def test(row: str):
     n_dam = len([s for s in re.findall(r"(\#)", springs) if s != ''])
     n_unk = len([s for s in re.findall(r"(\?)", springs) if s != ''])
 
-    return n_unk - (sum(group_nums) - n_dam) - (len(group_nums) - g_wrk) + 1
-
+    # the unknowns have to be either damaged (#) or functional (.)
+    # groups of damaged springs (#) have to be separated by functional springs (.)
+    # the number of groups of '#' is given as the len(group_nums), minus 1 because we want number of '.' between groups
+    # number of unknowns - remaining damaged - number of groups of functional
+    ways = n_unk - (sum(group_nums) - n_dam) - (len(group_nums) - g_wrk - 1) + 1
+    return ways
 
 
 def part_2():
