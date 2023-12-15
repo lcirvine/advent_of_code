@@ -13,18 +13,12 @@ def part_1():
     arr = np.array([list(row) for row in data.splitlines()])
     num_rows, num_cols = arr.shape
     for col in range(num_cols):
-        rocks = deque(arr[:, col])
-        ix_round = deque([ix for ix, char in enumerate(rocks) if char == 'O'])
-        ix_square = deque([ix for ix, char in enumerate(rocks) if char == '#'])
-        # putting in a 'blocker' in the first position
-        ix_square = deque([0])
-        for rr in ix_round:
-            insert_pos = [i for i in ix_square if i <= rr][-1]
-            # replacing the round rock with an empty space
-            rocks.remove('.')
-            rocks.insert(insert_pos, 'O')
-        total_load += sum([ix for ix, char in enumerate(rocks) if char == 'O'])
-        arr[:, col] = rocks
+        rocks_str = ''.join(arr[:, col])
+        rocks = []
+        for segment in rocks_str.split('#'):
+            rocks.extend(['#'] + sorted(segment))
+        total_load += sum([i for i, char in enumerate(rocks) if char == 'O'])
+        arr[:, col] = rocks[::-1][:num_rows]
     return total_load
 
 
