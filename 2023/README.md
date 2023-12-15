@@ -494,3 +494,31 @@ Like the previous day, part 2 of this puzzle is difficult and involves large num
 | **Part 1**  | **Part 2** |
 |-------------|------------|
 |:relaxed:| :thinking: :neckbeard: |
+
+---
+## Day 14 :rock:
+
+[🧩](https://adventofcode.com/2023/day/14 "Puzzle")    [:octocat:](https://github.com/lcirvine/advent_of_code/blob/master/2023/day14.py "Code")
+
+### Part 1
+
+- This one was hard for me
+- I put the input into a numpy array to make it easier to slice into columns
+- My strategy was to go column by column, split the rocks into segments, sort the segments, then put them back into the array
+- Getting the sorting right was tricky, especially because I needed to reverse the order of the columns to calculate the load (the array started with 0 at the top and went increased as you go down, the puzzle scoring had the highest number at the top and decreased as you go down)
+- In earlier attempts I tried using deque. I though being able to pop/extend left and right would be helpful here. In the end I just used a list.
+
+### Part 2
+
+- I tried to use the same approach to 'brute force' the solution for part 2. 
+- I still need to find what the trick is to this. My guess is that the rocks will settle into a pattern.
+- To test that theory, I tried running this on 1000 cycles and, surprisingly, it worked! I'm pleased but... it just feels wrong.
+
+### Tags
+- numpy
+- deque
+
+### Feelings about today's puzzles
+| **Part 1**        | **Part 2** |
+|-------------------|------------|
+| :raised_eyebrow: :smile:| :exploding_head: :open_mouth:|
