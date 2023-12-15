@@ -5,7 +5,7 @@ sys.path.append('..')
 from aoc_utils import get_input, submit_answer
 
 day_num = 15
-data = get_input(day_num, test=True)
+data = get_input(day_num)
 
 
 def hash_val(s: str) -> int:
@@ -24,8 +24,15 @@ def part_1():
     return value
 
 
-def focusing_power():
-    pass
+def focusing_power(boxes: dict):
+    total = 0
+    for box_number, lenses in boxes.items():
+        lens_counter = 1
+        for lens in lenses:
+            lens_power = (box_number + 1) * lens_counter * lens[1]
+            lens_counter += 1
+            total += lens_power
+    return total
 
 
 def part_2():
@@ -52,9 +59,10 @@ def part_2():
                 boxes[val][slot_num[0]][1] = focal_len
             else:
                 boxes[val].append([label, focal_len])
+    return focusing_power(boxes)
 
 
 if __name__ == '__main__':
     a1 = part_1()
     a2 = part_2()
-    submit_answer(answer_1=a1, answer_2=a2, day_num=day_num)
+    submit_answer(answer_1=a1, answer_2=a2, day_num=day_num, submit=True)

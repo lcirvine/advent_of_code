@@ -540,11 +540,14 @@ Like the previous day, part 2 of this puzzle is difficult and involves large num
 - I really wanted to just reverse the list of steps `steps[::-1]` to start from the end, then just only look at the latest instruction for each label. Even if they're added last-to-first, I can reverse the list of lenses
 - However, that won't work because sometimes you just replace the focal length and keep the lens in the same place
 - Replacing the focal length values also means that you can not use tuples as items in the list. 
+- The data structure ended up being a little complex, it's a dictionary with box number as key, the values are lists of lists with the label and focal length in the list
+- This could probably be cleaned up a bit, but the code worked first time, so I went with it
 
 ### Tags
 - ASCII character value
+- default dict
 
 ### Feelings about today's puzzles
 | **Part 1** | **Part 2** |
 |------------|------------|
-|:grinning:||
+|:grinning:|:smile:|
