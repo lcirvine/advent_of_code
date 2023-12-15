@@ -522,3 +522,29 @@ Like the previous day, part 2 of this puzzle is difficult and involves large num
 | **Part 1**        | **Part 2** |
 |-------------------|------------|
 | :raised_eyebrow: :smile:| :exploding_head: :open_mouth:|
+
+---
+## Day 15
+
+[🧩](https://adventofcode.com/2023/day/15 "Puzzle")    [:octocat:](https://github.com/lcirvine/advent_of_code/blob/master/2023/day15.py "Code")
+
+### Part 1
+
+- This was surprisingly easy. 
+- You just split the input by ',', go through each character in the string and calculate the value
+- One thing to know: `ord` will give you the ASCII value of a character
+
+### Part 2
+
+- Refactored part 1 to create a separate function to calculate the hash value
+- I really wanted to just reverse the list of steps `steps[::-1]` to start from the end, then just only look at the latest instruction for each label. Even if they're added last-to-first, I can reverse the list of lenses
+- However, that won't work because sometimes you just replace the focal length and keep the lens in the same place
+- Replacing the focal length values also means that you can not use tuples as items in the list. 
+
+### Tags
+- ASCII character value
+
+### Feelings about today's puzzles
+| **Part 1** | **Part 2** |
+|------------|------------|
+|:grinning:||
