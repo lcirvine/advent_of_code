@@ -551,3 +551,48 @@ Like the previous day, part 2 of this puzzle is difficult and involves large num
 | **Part 1** | **Part 2** |
 |------------|------------|
 |:grinning:|:smile:|
+
+---
+## Day 16
+
+[🧩](https://adventofcode.com/2023/day/16 "Puzzle")    [:octocat:](https://github.com/lcirvine/advent_of_code/blob/master/2023/day16.py "Code")
+
+### Part 1
+
+- Be careful using '\\' because it's an escape character. You will need to do a double backslash. 
+- Created a map of (x, y) tuples for coordinates with the character in that location as the value
+- I need to know what direction the light beam is heading, so I need to know the previous location and the current location, then I can calculate the difference in x and y values as delta_x and delta_y. 
+  - The delta_x and delta_y values should either be -1, 0, or 1
+- After I started listing out all the directional changes, I realized that it can be simplified adding delta_y to x and adding delta_x to y (and multiplying by -1 for one type of character)
+  ```python
+  direction_map = {
+      (1, 0, '/'): (0, -1),   # moving right -> / -> up
+      (-1, 0, '/'): (0, 1),   # moving left  -> / -> down
+      (0, 1, '/'): (-1, 0),   # moving down  -> / -> left
+      (0, -1, '/'): (1, 0),  # moving up    -> / -> right
+  
+      (1, 0, '\\'): (0, 1),  # moving right -> / -> down
+      (-1, 0, '\\'): (0, -1),  # moving left  -> / -> up
+      (0, 1, '\\'): (1, 0),  # moving down  -> / -> right
+      (0, -1, '\\'): (-1, 0),  # moving up    -> / -> left
+  
+  }
+  ```
+  ```python
+  if current_char == '\\':
+      new_pos = (current_pos[0] + delta_y, current_pos[1] + delta_x)
+  elif current_char == '/':
+      new_pos = (current_pos[0] + delta_y * -1, current_pos[1] + delta_x * -1)
+  ```
+
+### Part 2
+
+- 
+
+### Tags
+- 
+
+### Feelings about today's puzzles
+| **Part 1** | **Part 2** |
+|------------|------------|
+|||
