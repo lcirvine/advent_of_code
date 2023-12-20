@@ -553,7 +553,7 @@ Like the previous day, part 2 of this puzzle is difficult and involves large num
 |:grinning:|:smile:|
 
 ---
-## Day 16
+## Day 16 :volcano:
 
 [🧩](https://adventofcode.com/2023/day/16 "Puzzle")    [:octocat:](https://github.com/lcirvine/advent_of_code/blob/master/2023/day16.py "Code")
 
@@ -596,3 +596,48 @@ Like the previous day, part 2 of this puzzle is difficult and involves large num
 | **Part 1** | **Part 2** |
 |------------|------------|
 |||
+
+
+---
+## Day 19 :leaves:
+
+[🧩](https://adventofcode.com/2023/day/19 "Puzzle")    [:octocat:](https://github.com/lcirvine/advent_of_code/blob/master/2023/day19.py "Code")
+
+### Part 1
+
+- The ratings are a dictionary given as a string. I used `eval` to make it into an actual dictionary, although, I did have to remove the curly brackets to make it work.
+  ```python
+  eval(f"dict({'{x=787,m=2655,a=1222,s=2876}'.strip('{').strip('}')})")
+  ```
+- The workflows are provided as 'px{a<2006:qkq,m>2090:A,rfg}'. I parsed that into a dictionary with the workflow name ('px' in this example) as the key and a list of tuples as (test, result if test evaluates to True)
+  - The last value in the string ('rfg' in the example) is the else... value. If no other tests pass, this should be the value. 
+  - I appended True as the test for this value `test_list.append(('True', test))` so that I will always have one test evaluate to true
+  - The final result looked like this 
+    - `workflows['px'] = [('a<2006', 'qkq'), ('m>2090', 'A', 'True', 'rfg')]`
+- Finally, I created a recursive function where I could pass in my 'xmas' ratings as kwargs, use `eval` to evaluate each test for that workflow name in the workflows dictionary, then if the result was a new workflow pass that workflow name back into the function with my kwargs. 
+
+### Part 2
+
+- Conceptually I can understand this problem, but I haven't worked out how to solve it yet. 
+- In part 2 rather than looking at the parts in the list, you're asked to find how many combinations will be accepted. 
+- This starts to look more like a decision tree. You wat to find the ranges of values where the nodes end in 'A' for accepted.
+- I've written out the decision tree for the example. Now I need to figure out how to start at the accepted 'leaves' and work my way up the tree to find the value ranges that would lead to those nodes. 
+- From looking at the tree, I can see that there are shortcuts.
+  - `in{s<1351:px,qqz}` this rule says that if s > 1351, I should go to 'qqz' which is `qqz{s>2770:qs,m<1801:hdj,R}`. S is never going to be < 1351 and > 2770 so I would never go to node 'qs' from here. 
+  - `lnx{m>1548:A,A}` either way, the result of this node is accepted. So any branch that leads to 'lnx' will be accepted.
+    - I can follow this up even further to node 'px' `px{a<2006:qkq,m>2090:A,rfg}` where all the 'No' branches lead to accepted.
+- Starting with 'in' `in{s<1351:px,qqz}`
+  - 'Yes': The accepted values from this side of the tree will be where s < 1351 and a < 2006 or (a > 2006 and x > 1416)
+  - 'No': The accepted values from this side of the tree will be where s > 1351 and m < 1801 and (m > 838 or a < 1716)
+
+### Tags
+- eval
+- kwargs
+- recursion
+- recursive function
+- decision tree
+
+### Feelings about today's puzzles
+| **Part 1** | **Part 2** |
+|------------|------------|
+|:smile:|:raised_eyebrow:|
