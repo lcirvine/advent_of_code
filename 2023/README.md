@@ -8,12 +8,12 @@ https://adventofcode.com/2023
 
 [🧩](https://adventofcode.com/2023/day/1 "Puzzle")    [:octocat:](https://github.com/lcirvine/advent_of_code/blob/master/2023/day1.py "Code")
 
-### Part 1
+### Part 1 :star:
 
 - Used regex to find all digits in string
 - Added the strings of digits ('1' + '2' = '12' rather than 1 + 2 = 3), then converted to an integer 
 
-### Part 2
+### Part 2 :star:
 
 - Used regex to find either digits or words for numbers (i.e. 'one', 'two', etc.) 
     ```python 
@@ -42,11 +42,11 @@ https://adventofcode.com/2023
 
 [🧩](https://adventofcode.com/2023/day/2 "Puzzle")    [:octocat:](https://github.com/lcirvine/advent_of_code/blob/master/2023/day2.py "Code")
 
-## Part 1
+## Part 1 :star:
 - To find which games are possible, you only need to find the max number of cubes of each color
 - Used regex to find the number of cubes for each color and the game ID
 
-## Part 2
+## Part 2 :star:
 - Most of the work was already done since I already found the max number for each color
 - All I needed to do in part 2 was multiply those numbers together for each game
 
@@ -69,14 +69,16 @@ https://adventofcode.com/2023
   - a list of special character coordinates - all coordinates where the value was a special character
   - a list of gear coordinates - in pt 2 gears were given as '*' so I saved those coordinates in a list
 - Today's code could be cleaned up a bit, I think this could have been done in a simpler way
-### Part 1
+
+### Part 1 :star:
 - I went through each row to find all the digits in that row
   - ```[mo for mo in re.finditer(r"(\d*)", row) if mo.group()]```
   - ```re.finditer()``` to find all matches in the row
   - ```(\d*)``` is greedy, will return all digits in the number
 - Then I found the 'neighbors' (the coordinates around the number)
 - Finally checked if any of the neighbors were special characters
-### Part 2
+  
+### Part 2 :star:
 - In part 2, I started with the gear coordinates 
 - Then looked at the row above, on and below the row with the gear
 - Then found the digits in that row
@@ -104,11 +106,11 @@ https://adventofcode.com/2023
   - my numbers - the numbers I had on the scratchcard would be in the 2nd group
 - Data structure - I tried a few different ways to organize the data. I figured out that all we really need is the number of wins for each card and, for part 2, which scratchcards would be won by that card. I created a dictionary with card ID as the key and values for number of cards, how many cards that scratchcard would win, and what cards would be won by that scratchcard.
 
-### Part 1
+### Part 1 :star:
 - The main thing you need to know for part 1 is how many wins were there for each scratchcard
 - The number of wins was already in my dictionary, so I looped through to find the number of wins, then find the number of points earned. 
 
-### Part 2
+### Part 2 :star:
 - Created a recursive function to increment the number of cards
   ```python 
     def increment_winners(card_id):
@@ -137,12 +139,12 @@ https://adventofcode.com/2023
 
 I found this puzzle really difficult. 
 
-### Part 1
+### Part 1 :star:
 - Even parsing this was difficult. I created a dictionary for the almanac which had seeds, then each mapping. The keys for each mapping were tuples with the ranges of values for that mapping.
 - The almanac dictionary should already be in order since I'm using python 3.10. However, instead of relying on that I created a tuple with each step. That way I could find the next step by the index in the tuple.
 - After creating the almanac, I created a recursive function to fetch the value for the next step (the destination).
 
-### Part 2
+### Part 2 :o:
 - The number of seeds in each range is too large to go one-by-one and find the mappings like I did in part 1
 - I'm still trying to find the clever way to do this. Perhaps if I start at the end and work my back? The puzzle wants the minimum location. Could I find the minimum location, then work backward to find the seed?
 
@@ -162,14 +164,14 @@ I found this puzzle really difficult.
 
 Like the previous day, part 2 of this puzzle is difficult and involves large numbers.
 
-### Part 1
+### Part 1 :star:
 - *For each whole millisecond you spend at the beginning of the race holding down the button, the boat's speed increases by one millimeter per millisecond.* So you 'charge up' your speed at the beginning of the race, then continue at that speed until time expires.
   - ```distance = (time - speed) * speed```
 - The numbers were small enough that I could go through each speed in the range to see if it would beat the distance record
 - Used a list comprehension to find all speeds in range of times which would beat the distance record
 - Used ```np.prod``` to find the product of a list of values
 
-### Part 2
+### Part 2 :star:
 - I used the 'brute force' approach which made part 2 very similar to part 1. 
   - The values are much larger than part 1, so it will take longer to solve.
   - However, it didn't take *that* long to run, much less time than trying to brute force part 2 from day 5. 
@@ -204,7 +206,7 @@ Like the previous day, part 2 of this puzzle is difficult and involves large num
 
 [🧩](https://adventofcode.com/2023/day/7 "Puzzle")    [:octocat:](https://github.com/lcirvine/advent_of_code/blob/master/2023/day7.py "Code")
 
-### Part 1
+### Part 1 :star:
 - I assigned a letter value to each card in order of the card's value. That way I can sort alphabetically. 
    ```python
   from string import ascii_uppercase
@@ -236,7 +238,7 @@ Like the previous day, part 2 of this puzzle is difficult and involves large num
     poker_round = sorted(poker_round, key=lambda x: x[2])                   # sort by number of unique cards, ascending
 ```
 
-### Part 2
+### Part 2 :star:
 - In part 2, 'J' is now a wildcard i.e. it can be used as any card. That means that:
   - If you have a J in your hand, the number of unique cards should decrease by 1 and 
   - For each J in your hand, the max value of a single card should increase by 1
@@ -268,7 +270,7 @@ Like the previous day, part 2 of this puzzle is difficult and involves large num
 
 [🧩](https://adventofcode.com/2023/day/8 "Puzzle")    [:octocat:](https://github.com/lcirvine/advent_of_code/blob/master/2023/day8.py "Code")
 
-### Part 1
+### Part 1 :star:
 - Parsed the input into a string of instructions and a dictionary with the nodes as keys and the value as a tuple with left and right destination nodes
 - For part 1, I started at node AAA and cycle through the directions until you end at ZZZ
 - You get the destination node from the node_map dictionary created when parsing the data
@@ -290,7 +292,7 @@ Like the previous day, part 2 of this puzzle is difficult and involves large num
       return node_map[current_node][next_node_num]
   ```
 
-### Part 2
+### Part 2 :star:
 - In part 2 I needed to find how many steps it takes for A nodes (all nodes that end with A) to reach Z nodes (all nodes that end with Z)
 - My first attempt at solving part 2 was the 'brute force' approach. However, running that would take a **very** long time.
   ```python 
@@ -330,7 +332,7 @@ Like the previous day, part 2 of this puzzle is difficult and involves large num
 
 [🧩](https://adventofcode.com/2023/day/9 "Puzzle")    [:octocat:](https://github.com/lcirvine/advent_of_code/blob/master/2023/day9.py "Code")
 
-### Part 1
+### Part 1 :star:
 - To find the next number in the sequence, find the differences between a set of numbers and then find the difference of the differences until the differences are all 0 (hopefully that make sense)
 - Created a recursive function to find the differences between numbers in the list, then passed the differences back into the list until all the differences were zero.
 - You could actually stop one loop earlier when the differences were all the same number. I debated between using groupby to see if all the numbers were the same or checking if all numbers were zero. 
@@ -342,7 +344,7 @@ Like the previous day, part 2 of this puzzle is difficult and involves large num
   ```
 - I figured out that the sum of the last differences would be added on to the next number
 
-### Part 2
+### Part 2 :star:
 
 - I thought part 2 would be easy, I could just subtract the sum of differences from the first number in the sequence
 - After writing the numbers down on paper, I figured out the pattern. Instead of adding up all the differences, you subtract every other one. Why does this work? No idea. But it works.
@@ -361,12 +363,12 @@ Like the previous day, part 2 of this puzzle is difficult and involves large num
 
 [🧩](https://adventofcode.com/2023/day/10 "Puzzle")    [:octocat:](https://github.com/lcirvine/advent_of_code/blob/master/2023/day10.py "Code")
 
-### Part 1
+### Part 1 :o:
 
 - Currently, my code is pretty convoluted. I've tried to solve this puzzle a few different ways and made some mistakes along the way. This puzzle is still a work in progress for me.
 - I'm able to navigate the maze now and I can solve the test input. However, I get recursion errors when I try to run my code on the actual input. 
 
-### Part 2
+### Part 2 :o:
 
 - 
 
@@ -384,7 +386,7 @@ Like the previous day, part 2 of this puzzle is difficult and involves large num
 
 [🧩](https://adventofcode.com/2023/day/11 "Puzzle")    [:octocat:](https://github.com/lcirvine/advent_of_code/blob/master/2023/day11.py "Code")
 
-### Part 1
+### Part 1 :star:
 
 - In this puzzle, you need to find the distances between points (galaxies in the puzzle setup). But the catch is that the map expands if there are no points in the row or column.
 - In part one I created a numpy array from the puzzle data.
@@ -409,7 +411,7 @@ Like the previous day, part 2 of this puzzle is difficult and involves large num
   ```
 - Finally, finding the distance between two galaxies was just finding the absolute value between the X values and the absolute value between the Y values
 
-### Part 2
+### Part 2 :star:
 
 - In part 2 the empty spaces expand by 1,000,000 rather than just 1. That makes it too large to put into an array
 - Since I can find the empty rows and columns, I should be able to tell when a pair of galaxies cross that empty row/column
@@ -430,7 +432,7 @@ Like the previous day, part 2 of this puzzle is difficult and involves large num
 
 [🧩](https://adventofcode.com/2023/day/12 "Puzzle")    [:octocat:](https://github.com/lcirvine/advent_of_code/blob/master/2023/day12.py "Code")
 
-### Part 1
+### Part 1 :o:
 
 - I'm finding this one really difficult.
 - spring_cond_map = {'.': 'operational', '#': 'damaged', '?': 'unknown'}
@@ -448,7 +450,7 @@ Like the previous day, part 2 of this puzzle is difficult and involves large num
   - So the number of groups of functional springs (.) has to be one less than the number of groups of damaged springs (#) which is given for each row
 - I've tried taking the number of unknowns - the damaged springs I know of - the number of groups of functional springs. Does that leave the number of ways that work? 
 
-### Part 2
+### Part 2 :o:
 
 - 
 
@@ -465,7 +467,7 @@ Like the previous day, part 2 of this puzzle is difficult and involves large num
 
 [🧩](https://adventofcode.com/2023/day/13 "Puzzle")    [:octocat:](https://github.com/lcirvine/advent_of_code/blob/master/2023/day13.py "Code")
 
-### Part 1
+### Part 1 :star:
 
 - I feel like numpy was a good choice to use on today's puzzle, Numpy has functions like `np.flip` which allowed me to flip the array and compare its mirror image
 - First I created an array from the pattern. 
@@ -474,7 +476,7 @@ Like the previous day, part 2 of this puzzle is difficult and involves large num
 - Then I trimmed the arrays so that they had equal numbers of rows/columns
 - Finally, I compared the resulting arrays again using `np.array_equal` and added to the score if the arrays were equal 
 
-### Part 2
+### Part 2 :star:
 
 - In part 2 one of the items is the opposite type. The one difference can be anywhere, even in the row/column with the reflection point.
 - Rather than going through and updating the character from '.' to '#', I tried to do a similar comparison, but now look for 1 difference instead of being equal
@@ -500,7 +502,7 @@ Like the previous day, part 2 of this puzzle is difficult and involves large num
 
 [🧩](https://adventofcode.com/2023/day/14 "Puzzle")    [:octocat:](https://github.com/lcirvine/advent_of_code/blob/master/2023/day14.py "Code")
 
-### Part 1
+### Part 1 :star:
 
 - This one was hard for me
 - I put the input into a numpy array to make it easier to slice into columns
@@ -508,7 +510,7 @@ Like the previous day, part 2 of this puzzle is difficult and involves large num
 - Getting the sorting right was tricky, especially because I needed to reverse the order of the columns to calculate the load (the array started with 0 at the top and went increased as you go down, the puzzle scoring had the highest number at the top and decreased as you go down)
 - In earlier attempts I tried using deque. I though being able to pop/extend left and right would be helpful here. In the end I just used a list.
 
-### Part 2
+### Part 2 :star:
 
 - I tried to use the same approach to 'brute force' the solution for part 2. 
 - I still need to find what the trick is to this. My guess is that the rocks will settle into a pattern.
@@ -528,13 +530,13 @@ Like the previous day, part 2 of this puzzle is difficult and involves large num
 
 [🧩](https://adventofcode.com/2023/day/15 "Puzzle")    [:octocat:](https://github.com/lcirvine/advent_of_code/blob/master/2023/day15.py "Code")
 
-### Part 1
+### Part 1 :star:
 
 - This was surprisingly easy. 
 - You just split the input by ',', go through each character in the string and calculate the value
 - One thing to know: `ord` will give you the ASCII value of a character
 
-### Part 2
+### Part 2 :star:
 
 - Refactored part 1 to create a separate function to calculate the hash value
 - I really wanted to just reverse the list of steps `steps[::-1]` to start from the end, then just only look at the latest instruction for each label. Even if they're added last-to-first, I can reverse the list of lenses
@@ -557,7 +559,7 @@ Like the previous day, part 2 of this puzzle is difficult and involves large num
 
 [🧩](https://adventofcode.com/2023/day/16 "Puzzle")    [:octocat:](https://github.com/lcirvine/advent_of_code/blob/master/2023/day16.py "Code")
 
-### Part 1
+### Part 1 :o:
 
 - Be careful using '\\' because it's an escape character. You will need to do a double backslash. 
 - Created a map of (x, y) tuples for coordinates with the character in that location as the value
@@ -585,7 +587,7 @@ Like the previous day, part 2 of this puzzle is difficult and involves large num
       new_pos = (current_pos[0] + delta_y * -1, current_pos[1] + delta_x * -1)
   ```
 
-### Part 2
+### Part 2 :o:
 
 - 
 
@@ -603,7 +605,7 @@ Like the previous day, part 2 of this puzzle is difficult and involves large num
 
 [🧩](https://adventofcode.com/2023/day/19 "Puzzle")    [:octocat:](https://github.com/lcirvine/advent_of_code/blob/master/2023/day19.py "Code")
 
-### Part 1
+### Part 1 :star:
 
 - The ratings are a dictionary given as a string. I used `eval` to make it into an actual dictionary, although, I did have to remove the curly brackets to make it work.
   ```python
@@ -616,7 +618,7 @@ Like the previous day, part 2 of this puzzle is difficult and involves large num
     - `workflows['px'] = [('a<2006', 'qkq'), ('m>2090', 'A', 'True', 'rfg')]`
 - Finally, I created a recursive function where I could pass in my 'xmas' ratings as kwargs, use `eval` to evaluate each test for that workflow name in the workflows dictionary, then if the result was a new workflow pass that workflow name back into the function with my kwargs. 
 
-### Part 2
+### Part 2 :o:
 
 - Conceptually I can understand this problem, but I haven't worked out how to solve it yet. 
 - In part 2 rather than looking at the parts in the list, you're asked to find how many combinations will be accepted. 
