@@ -643,3 +643,30 @@ Like the previous day, part 2 of this puzzle is difficult and involves large num
 | **Part 1** | **Part 2** |
 |------------|------------|
 |:smile:|:raised_eyebrow:|
+
+---
+## Day 21 :man_farmer:
+
+[🧩](https://adventofcode.com/2023/day/21 "Puzzle")    [:octocat:](https://github.com/lcirvine/advent_of_code/blob/master/2023/day21.py "Code")
+
+### Part 1
+
+- I feel close to getting this one, I'm just not there yet. 
+- My first thought was to start at the start point, then travel outward and do a recursive loop for all the next points in the path. 
+- Instead, I decided to replace the character in the map with the step number, then loop through each point on the map for each step to find neighboring cells for the next step. I was worried that the first approach might lead to recursion errors. 
+  - The issue I'm having with this approach is that the gardner can retrace his steps, going back to cells previously visited. 
+    - First, that means that neighbors can be numbers as well as empty spaces '.', basically anything except a rock '#'.
+    - I'm going to have to do something to find the +/- 1 neighbors for the next step as well as the difference in steps from the cell I've already passed.
+- I've also created a map with x, y coordinates for keys as well as using a numpy array. I'm not sure which direction to go yet. Viewing the numpy array does make it easier to debug though.
+
+### Part 2
+
+- 
+
+### Tags
+- numpy
+
+### Feelings about today's puzzles
+| **Part 1** | **Part 2** |
+|------------|------------|
+|:raised_eyebrow:||
