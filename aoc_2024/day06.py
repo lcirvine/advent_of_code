@@ -16,7 +16,7 @@ class GuardMap:
                     self.guard_pos = (x, y)
         self.direction = (0, -1)  # up
         self.visited = set()
-        self.obstructions = []
+        self.obstructions = set()
 
     def turn_right(self):
         directions = [
@@ -40,14 +40,17 @@ class GuardMap:
         right_dirction = self.turn_right()
         rx = x + right_dirction[0]
         ry = y + right_dirction[1]
-        while (rx, ry) in self.visited:
+        while (rx, ry) in self.guard_map:
             nrx = rx + right_dirction[0]
             nry = ry + right_dirction[1]
-            if self.guard_map.get((nrx, nry)) == '#':
+            if self.guard_map.get((nrx, nry)) == '#' and (rx, ry) in self.visited:
                 next_pos = self.next_position()
-                self.obstructions.append(next_pos)
-            rx = nrx
-            ry = nry
+                if next_pos in self.guard_map:
+                    self.obstructions.add(next_pos)
+                break
+            else:
+                rx = nrx
+                ry = nry
 
     def travel_map(self):
         while self.guard_pos in self.guard_map:
@@ -68,7 +71,7 @@ class GuardMap:
 
 
 if __name__ == '__main__':
-    gm = GuardMap(test=True)
+    gm = GuardMap()
     gm.travel_map()
     visited = gm.return_visited()
     obstructions = gm.return_obstructions()
