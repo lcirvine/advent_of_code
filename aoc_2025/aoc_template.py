@@ -4,9 +4,6 @@ import sys
 sys.path.append('..')
 from aoc_utils import get_input, submit_answer
 
-day_num = date.today().day
-data = get_input(day_num)
-
 
 def part_1(puzzle_input):
     return None
